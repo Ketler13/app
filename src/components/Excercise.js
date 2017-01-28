@@ -1,13 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import MediaLinkList from './MediaLinkList'
-import toggleOpen from '../decorators/toggleOpen'
 
-class Excercise extends Component {
+export default class Excercise extends Component {
     render() {
-        const { excercise } = this.props
+        const { excercise, onClick } = this.props
         return (
             <div>
-                <h3 onClick = {this.props.toggleOpen}>{excercise.title}</h3>
+                <h3 onClick = {onClick}>{excercise.title}</h3>
                 {this.getBody()}
             </div>
         )
@@ -23,5 +22,3 @@ class Excercise extends Component {
         )
     }
 }
-
-export default toggleOpen(Excercise)

@@ -3,12 +3,20 @@ import { excercises } from '../fixtures'
 import Excercise from './Excercise'
 
 export default class ExcerciseList extends Component {
+    state = {
+        openExcerciseId: null
+    }
+
     render() {
         const { excercises } = this.props
         const excerciseElements = excercises.map(excercise => {
             return (
                  <li key = {excercise.id}>
-                    <Excercise  excercise = {excercise}/>
+                    <Excercise
+                        excercise = {excercise}
+                        isOpen = {this.state.openExcerciseId === excercise.id}
+                        onClick = {this.toggleOpenExcercise(excercise.id)}
+                    />
                 </li>
             )
         })
@@ -18,5 +26,12 @@ export default class ExcerciseList extends Component {
                 <ul>{excerciseElements}</ul>
             </div>
         )
+    }
+
+    toggleOpenExcercise = id => ev => {
+        ev && ev.preventDeafult && ev.preventDeafult()
+        this.setState({
+            openExcerciseId: id
+        })
     }
 }
