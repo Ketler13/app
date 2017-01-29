@@ -3,21 +3,21 @@ import React, { Component, PropTypes } from 'react'
 export default function accordion(Component) {
     return class WrapperComponent extends Component {
         state = {
-            openExcerciseId: null
+            openItemId: null
         }
 
         render() {
             return <Component
                 {...this.props}
-                openExcerciseId = {this.state.openExcerciseId}
-                toggleOpenExcercise = {this.toggleOpenExcercise}
+                openItemId = {this.state.openItemId}
+                toggleOpenItem = {this.toggleOpenItem}
                 />
         }
 
-        toggleOpenExcercise = id => ev => {
+        toggleOpenItem = id => ev => {
             ev && ev.preventDeafult && ev.preventDeafult()
             this.setState({
-                openExcerciseId: (this.state.openExcerciseId === id) ? null : id
+                openItemId: (this.state.openItemId === id) ? null : id
             })
         }
     }
