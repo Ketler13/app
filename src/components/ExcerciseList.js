@@ -1,12 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { excercises } from '../fixtures'
 import Excercise from './Excercise'
+import accordion from '../decorators/accordion'
 
-export default class ExcerciseList extends Component {
-    state = {
-        openExcerciseId: null
-    }
-
+class ExcerciseList extends Component {
     render() {
         const { excercises } = this.props
         const excerciseElements = excercises.map(excercise => {
@@ -14,8 +11,8 @@ export default class ExcerciseList extends Component {
                  <li key = {excercise.id}>
                     <Excercise
                         excercise = {excercise}
-                        isOpen = {this.state.openExcerciseId === excercise.id}
-                        onClick = {this.toggleOpenExcercise(excercise.id)}
+                        isOpen = {this.props.openExcerciseId === excercise.id}
+                        onClick = {this.props.toggleOpenExcercise(excercise.id)}
                     />
                 </li>
             )
@@ -27,11 +24,6 @@ export default class ExcerciseList extends Component {
             </div>
         )
     }
-
-    toggleOpenExcercise = id => ev => {
-        ev && ev.preventDeafult && ev.preventDeafult()
-        this.setState({
-            openExcerciseId: id
-        })
-    }
 }
+
+export default accordion(ExcerciseList)
