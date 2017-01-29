@@ -11,7 +11,7 @@ class ExcerciseList extends Component {
                  <li key = {excercise.id}>
                     <Excercise
                         excercise = {excercise}
-                        isOpen = {this.props.openItemId === excercise.id}
+                        isOpen = {this.props.isOpen(excercise.id)}
                         onClick = {this.props.toggleOpenItem(excercise.id)}
                     />
                 </li>

@@ -9,10 +9,12 @@ export default function accordion(Component) {
         render() {
             return <Component
                 {...this.props}
-                openItemId = {this.state.openItemId}
+                isOpen = {this.isOpen}
                 toggleOpenItem = {this.toggleOpenItem}
                 />
         }
+
+        isOpen = id => this.state.openItemId === id
 
         toggleOpenItem = id => ev => {
             ev && ev.preventDeafult && ev.preventDeafult()
