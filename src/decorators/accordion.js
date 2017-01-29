@@ -17,7 +17,7 @@ export default function accordion(Component) {
         toggleOpenExcercise = id => ev => {
             ev && ev.preventDeafult && ev.preventDeafult()
             this.setState({
-                openExcerciseId: id
+                openExcerciseId: (this.state.openExcerciseId === id) ? null : id
             })
         }
     }
