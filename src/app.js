@@ -1,6 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AppContainer from './components/AppContainer'
-import { excercises } from './fixtures'
+import { Provider } from 'react-redux'
+import store from './store'
 
-ReactDOM.render(<AppContainer excercises = {excercises} />, document.getElementById('container'))
+ReactDOM.render(
+    <Provider store = {store}>
+        <AppContainer />
+    </Provider>, document.getElementById('container'))
