@@ -1,13 +1,28 @@
-import { excercises } from '../fixtures'
-import { DELETE_EXCERCISE } from '../constants'
+import { DELETE_EXCERCISE, ADD_LINK } from '../constants'
+import { normalizedExcercises } from '../fixtures'
+import { arrayToMap } from '../helpers'
+import { Record } from 'immutable'
 
-export default (state = excercises, action) => {
-    const { type, payload } = action
+const ExcerciseModel = Record({
+    "id": null,
+    "date": null,
+    "title": null,
+    "text": null,
+    "comments": []
+})
 
-    switch(type) {
+const defaultState = arrayToMap(normalizedExcercises, ExcerciseModel)
+
+export default (excerciseState = defaultState, action) => {
+    const { type, payload, randomId } = action
+
+    switch (type) {
         case DELETE_EXCERCISE:
-            return state.filter(excercise => excercise.id !== payload.id)
+            return excerciseState.delete(payload.id)
+
+        case ADD_LINK:
+            return excerciseState.updateIn([payload.excerciseId, 'comments'], comments => comments.concat(randomId))
     }
 
-    return state
+    return excerciseState
 }

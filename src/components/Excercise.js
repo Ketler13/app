@@ -24,7 +24,7 @@ export default class Excercise extends Component {
         return (
             <section>
                 {this.props.excercise.text}
-                <MediaLinkList comments = {this.props.excercise.comments} />
+                <MediaLinkList excercise = {this.props.excercise} linksIds = {this.props.excercise.comments} />
             </section>
         )
     }

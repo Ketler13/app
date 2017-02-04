@@ -1,18 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import MediaLink from './MediaLink'
 import toggleOpen from '../decorators/toggleOpen'
+import { connect } from 'react-redux'
+import NewLinkForm from './NewLinkForm'
+import { addLink } from '../AC'
 
 class MediaLinkList extends Component {
     static propTypes = {
-        comments: PropTypes.array,
+        linksIds: PropTypes.array,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }
 
-    static defaultProps = {
-        comments: []
-    }
-    
     render() {
         return (
             <div>
@@ -31,18 +30,26 @@ class MediaLinkList extends Component {
     }
 
     getBody = () => {
-        if (!this.props.isOpen) return null
-        const { comments } = this.props
-        if (!comments || !comments.length) return <div>No links yet</div>
+        const { comments, excercise, isOpen, addLink } = this.props
+        if (!isOpen) return null
+        const form = <NewLinkForm addLink={(link) => addLink(excercise.id, link)} />
+        if (!comments || !comments.length) return <div><p>No links yet</p>{form}</div>
         const mediaItems = comments.map(comment => {
             return (
                 <li key = {comment.id}><MediaLink comment = {comment} /></li>
             )
         })
         return (
-            <ul>{mediaItems}</ul>
+            <div>
+                <ul>{mediaItems}</ul>
+                {form}
+            </div>
         )
     }
 }
 
-export default toggleOpen(MediaLinkList)
+export default connect((storeState, props) => {
+    return {
+        comments: props.linksIds.map(id => storeState.links.get(id))
+    }
+}, {addLink})(toggleOpen(MediaLinkList))

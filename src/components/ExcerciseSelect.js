@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import { connect } from 'react-redux'
 import { changeSelection } from '../AC/filters'
+import { mapToArray } from '../helpers'
 
 import 'react-select/dist/react-select.css'
 
@@ -30,5 +31,5 @@ class SelectFilter extends Component {
 
 export default connect(state => ({
     selected: state.filters.selected,
-    excercises: state.excercises
+    excercises: mapToArray(state.excercises)
 }), { changeSelection })(SelectFilter)

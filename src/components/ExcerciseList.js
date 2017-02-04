@@ -4,6 +4,7 @@ import Excercise from './Excercise'
 import { deleteExcercise } from '../AC'
 import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
+import { mapToArray } from '../helpers'
 
 class ExcerciseList extends Component {
     static PropTypes = {
@@ -36,7 +37,8 @@ class ExcerciseList extends Component {
 }
 
 export default connect((state) => {
-    const { excercises, filters } = state
+    const excercises = mapToArray(state.excercises)
+    const { filters } = state
     const {selected} = filters
     const { from, to } = filters.dateRange
 
