@@ -3,6 +3,16 @@ import MediaLink from './MediaLink'
 import toggleOpen from '../decorators/toggleOpen'
 
 class MediaLinkList extends Component {
+    static propTypes = {
+        comments: PropTypes.array,
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func
+    }
+
+    static defaultProps = {
+        comments: []
+    }
+    
     render() {
         return (
             <div>

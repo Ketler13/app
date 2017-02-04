@@ -6,6 +6,12 @@ import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
 
 class ExcerciseList extends Component {
+    static PropTypes = {
+        excercises: PropTypes.array.isRequired,
+        isOpenItem: PropTypes.func.isRequired,
+        toggleOpenItem: PropTypes.func.isRequired
+    }
+
     render() {
         const { excercises } = this.props
         const excerciseElements = excercises.map(excercise => {

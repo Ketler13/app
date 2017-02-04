@@ -2,6 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import MediaLinkList from './MediaLinkList'
 
 export default class Excercise extends Component {
+    static propTypes = {
+        excercise: PropTypes.object.isRequired,
+        isOpen: PropTypes.bool,
+        onClick: PropTypes.func
+    }
+
     render() {
         const { excercise, onClick, handleDelete } = this.props
         return (
