@@ -5,7 +5,7 @@ export default function MediaLink(props) {
     return (
         <div>
             <h4>{comment.user}</h4>
-            <p>{comment.text}</p>
+            <a href={comment.text}>{comment.text}</a>
         </div>
     )
 }
