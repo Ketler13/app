@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
+import NewSplitDetails from './NewSplitDetails'
 
 export default class NewSplit extends Component {
     state = {
@@ -22,6 +23,7 @@ export default class NewSplit extends Component {
                     multi={true}
                     onChange={this.selectChange}
                 />
+                <NewSplitDetails selected = {this.state.selected}/>
                 <input type="submit" value="Ok"/>
             </form>
         )
@@ -45,8 +47,12 @@ export default class NewSplit extends Component {
         ev.preventDefault()
         const { addSplit } = this.props
         const { date, selected } = this.state
-        const selectedExcercises = selected.map(sel => sel.label)
-        date && selectedExcercises && addSplit(date, selectedExcercises)
+        if (!date || !selected) return
+        const selectedExcercises = selected.map(sel => ({
+            id: sel.value,
+            name: sel.label
+        }))
+        addSplit(date, selectedExcercises)
         this.setState({
             date: "",
             selected: null
