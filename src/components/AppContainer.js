@@ -6,9 +6,9 @@ import Diary from './Diary'
 function AppContainer(props) {
     return (
         <div>
+            <Diary/>
             <Filter excercises = {[]}/>
             <ExcerciseList/>
-            <Diary/>
         </div>
     )
 }

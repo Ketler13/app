@@ -5,7 +5,8 @@ import NewSplitDetails from './NewSplitDetails'
 export default class NewSplit extends Component {
     state = {
         date: "",
-        selected: null
+        selected: null,
+        countOfDetails: []
     }
 
     render() {
@@ -14,6 +15,7 @@ export default class NewSplit extends Component {
             label: exc.title,
             value: exc.id
         }))
+        console.log(this.state)
         return (
             <form onSubmit = {this.onSubmit}>
                 <input type="date" value={this.state.date} onChange={this.handleChange("date")}/>
@@ -23,7 +25,11 @@ export default class NewSplit extends Component {
                     multi={true}
                     onChange={this.selectChange}
                 />
-                <NewSplitDetails selected = {this.state.selected}/>
+                <NewSplitDetails
+                    selected = {this.state.selected}
+                    countOfDetails = {this.state.countOfDetails}
+                    handleDetail = {this.handleDetail}
+                />
                 <input type="submit" value="Ok"/>
             </form>
         )
@@ -56,6 +62,13 @@ export default class NewSplit extends Component {
         this.setState({
             date: "",
             selected: null
+        })
+    }
+
+    handleDetail = ev => {
+        const value = ev.target.value
+        this.setState({
+            countOfDetails: (value === "+") ? this.state.countOfDetails.concat(1) : this.state.countOfDetails.slice(0, -1)
         })
     }
 }
