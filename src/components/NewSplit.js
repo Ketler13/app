@@ -11,6 +11,7 @@ export default class NewSplit extends Component {
 
     componentDidMount() {
         let countOfDetails = {}
+        let currentCountsForDetailForms = {}
         this.props.excercises.forEach((exc) => {
             countOfDetails[exc.title] = []
         })
@@ -25,7 +26,6 @@ export default class NewSplit extends Component {
             label: exc.title,
             value: exc.id
         }))
-        console.log(this.state)
         return (
             <form onSubmit = {this.onSubmit}>
                 <input type="date" value={this.state.date} onChange={this.handleChange("date")}/>
@@ -77,19 +77,10 @@ export default class NewSplit extends Component {
 
     handleDetail = ev => {
         const { name, value } = ev.target
-        // if (!this.state.countOfDetails[name]) this.setState({
-        //     countOfDetails: {
-        //         ...this.state.countOfDetails,
-        //         [name]: []
-        //     }
-        // })
         this.setState({
             countOfDetails: {
                 ...this.state.countOfDetails,
                 [name]: (value === "+") ? this.state.countOfDetails[name].concat(1) : this.state.countOfDetails[name].slice(0, -1)}
         })
-        // this.setState({
-        //     countOfDetails: (value === "+") ? this.state.countOfDetails.concat(1) : this.state.countOfDetails.slice(0, -1)
-        // })
     }
 }

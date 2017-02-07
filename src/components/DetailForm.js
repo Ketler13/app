@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 
 export default function DetailForm(props) {
-    if (!props.countOfDetails || !props.countOfDetails.length) return null
-    const detailForms = props.countOfDetails.map(det => {
+    const { countOfDetails } = props
+    if (!countOfDetails || !countOfDetails.length) return null
+    const detailForms = countOfDetails.map((det, i) => {
         return (
-            <div key = {Math.random()}>
+            <div key = {i}>
                 <p>Weight: <input type="number" /></p>
                 <p>Times: <input type="number" /></p>
             </div>
@@ -12,7 +13,7 @@ export default function DetailForm(props) {
     })
     return (
         <div>
-        {detailForms}
+            {detailForms}
         </div>
     )
 }
