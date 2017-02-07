@@ -7,7 +7,7 @@ export default function NewSplitDetails(props) {
         return (
             <li key = {sel.value}>
                 <p>{sel.label}</p>
-                <DetailForm countOfDetails = {props.countOfDetails}/>
+                <DetailForm countOfDetails = {props.countOfDetails[sel.label]}/>
                 <input type="button" name = {sel.label} value = "+" onClick={props.handleDetail} />
                 <input type="button" name = {sel.label} value = "-" onClick={props.handleDetail} />
             </li>

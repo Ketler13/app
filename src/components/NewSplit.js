@@ -6,7 +6,17 @@ export default class NewSplit extends Component {
     state = {
         date: "",
         selected: null,
-        countOfDetails: []
+        countOfDetails: {}
+    }
+
+    componentDidMount() {
+        let countOfDetails = {}
+        this.props.excercises.forEach((exc) => {
+            countOfDetails[exc.title] = []
+        })
+        this.setState({
+            countOfDetails: {...countOfDetails}
+        })
     }
 
     render() {
@@ -66,9 +76,20 @@ export default class NewSplit extends Component {
     }
 
     handleDetail = ev => {
-        const value = ev.target.value
+        const { name, value } = ev.target
+        // if (!this.state.countOfDetails[name]) this.setState({
+        //     countOfDetails: {
+        //         ...this.state.countOfDetails,
+        //         [name]: []
+        //     }
+        // })
         this.setState({
-            countOfDetails: (value === "+") ? this.state.countOfDetails.concat(1) : this.state.countOfDetails.slice(0, -1)
+            countOfDetails: {
+                ...this.state.countOfDetails,
+                [name]: (value === "+") ? this.state.countOfDetails[name].concat(1) : this.state.countOfDetails[name].slice(0, -1)}
         })
+        // this.setState({
+        //     countOfDetails: (value === "+") ? this.state.countOfDetails.concat(1) : this.state.countOfDetails.slice(0, -1)
+        // })
     }
 }
