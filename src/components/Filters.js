@@ -7,7 +7,6 @@ class Filters extends Component {
         return (
             <div>
                 <ExcerciseSelect/>
-                <DateRange/>
             </div>
         )
     }

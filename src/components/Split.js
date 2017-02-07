@@ -1,19 +1,34 @@
-import React from 'react'
+import React, {Component} from 'react'
+import toggleOpen from '../decorators/toggleOpen'
 
-export default function Split(props) {
-    const excercises = props.excercises.map(exc => {
+class Split extends Component {
+    render() {
+        const { isOpen, date, toggleOpen} = this.props
+
         return (
-            <li key = {exc.id}>
-                {exc.name}
-            </li>
+            <div>
+                <p onClick={toggleOpen}>{date}</p>
+                {this.getBody()}
+            </div>
         )
-    })
+    }
 
-    return (
-        <div>
-            <p>{props.date}</p>
-            <ul>{excercises}</ul>
-            <p>{props.mark}</p>
-        </div>
-    )
+    getBody() {
+        const excercises = this.props.excercises.map(exc => {
+            return (
+                <li key = {exc.id}>
+                    {exc.name}
+                </li>
+            )
+        })
+        if (!this.props.isOpen) return null
+        return (
+            <div>
+                <ul>{excercises}</ul>
+                <p>{this.props.mark}</p>
+            </div>
+        )
+    }
 }
+
+export default toggleOpen(Split)
