@@ -1,5 +1,5 @@
 import { SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
-SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS } from '../constants'
+SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS, ADD, REMOVE } from '../constants'
 
 export function selectExcercisesForNewSplit(selected) {
     return {
@@ -28,12 +28,11 @@ export function setDefaultCountOfDetails(count) {
     }
 }
 
-export function setCountOfDetails(name, count) {
+export function setCountOfDetails(name, value) {
     return {
-        type: SET_COUNT_OF_DETAILS,
+        type: (value === '+') ? (SET_COUNT_OF_DETAILS + ADD) : (SET_COUNT_OF_DETAILS + REMOVE),
         payload: {
-            name,
-            count
+            name
         }
     }
 }

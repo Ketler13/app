@@ -18,8 +18,6 @@ export function addLink(excerciseId, link) {
 }
 
 export function addSplit(date, excercises) {
-    console.log(date, excercises)
-
     return {
         type: ADD_SPLIT,
         payload: {

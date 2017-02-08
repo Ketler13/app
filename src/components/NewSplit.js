@@ -6,18 +6,11 @@ import { selectExcercisesForNewSplit, selectDateForNewSplit,
          setDefaultCountOfDetails, setCountOfDetails } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
-    state = {
-        countOfDetails: {}
-    }
-
     componentDidMount() {
         let countOfDetails = {}
         let currentCountsForDetailForms = {}
         this.props.excercises.forEach((exc) => {
             countOfDetails[exc.title] = []
-        })
-        this.setState({
-            countOfDetails: {...countOfDetails}
         })
         this.props.setDefaultCountOfDetails(countOfDetails)
     }
@@ -41,7 +34,7 @@ class NewSplit extends Component {
                     />
                     <NewSplitDetails
                         selected = {selected}
-                        countOfDetails = {this.state.countOfDetails}
+                        countOfDetails = {countOfDetails}
                         handleDetail = {this.handleDetail}
                     />
                     <input type="submit" value="Ok"/>
@@ -62,18 +55,12 @@ class NewSplit extends Component {
 
     handleDetail = ev => {
         const { name, value } = ev.target
-        this.props.setCountOfDetails(name, 3)
-        this.setState({
-            countOfDetails: {
-                ...this.state.countOfDetails,
-                [name]: (value === "+") ? this.state.countOfDetails[name].concat(1) : this.state.countOfDetails[name].slice(0, -1)}
-        })
+        this.props.setCountOfDetails(name, value)
     }
 
     onSubmit = (ev) => {
         ev.preventDefault()
-        const { addSplit, selected } = this.props
-        const { date } = this.state
+        const { addSplit, selected, date } = this.props
         if (!date || !selected) return
         const selectedExcercises = selected.map(sel => ({
             id: sel.value,
