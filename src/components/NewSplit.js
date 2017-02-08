@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
+import { connect } from 'react-redux'
+import { selectExcercisesForNewSplit } from '../AC/newSplitAC'
 
-export default class NewSplit extends Component {
+class NewSplit extends Component {
     state = {
         date: "",
-        selected: null,
         countOfDetails: {}
     }
 
@@ -21,27 +22,30 @@ export default class NewSplit extends Component {
     }
 
     render() {
-        const { excercises } = this.props
+        const { excercises, date, selected, countOfDetails } = this.props
         const options = excercises.map(exc => ({
             label: exc.title,
             value: exc.id
         }))
         return (
-            <form onSubmit = {this.onSubmit}>
-                <input type="date" value={this.state.date} onChange={this.handleChange("date")}/>
-                <Select
-                    options={options}
-                    value={this.state.selected}
-                    multi={true}
-                    onChange={this.selectChange}
-                />
-                <NewSplitDetails
-                    selected = {this.state.selected}
-                    countOfDetails = {this.state.countOfDetails}
-                    handleDetail = {this.handleDetail}
-                />
-                <input type="submit" value="Ok"/>
-            </form>
+            <div>
+                <h3>Add new split to diary</h3>
+                <form onSubmit = {this.onSubmit}>
+                    <input type="date" value={this.state.date} onChange={this.handleChange("date")}/>
+                    <Select
+                        options={options}
+                        value={selected}
+                        multi={true}
+                        onChange={this.selectChange}
+                    />
+                    <NewSplitDetails
+                        selected = {selected}
+                        countOfDetails = {this.state.countOfDetails}
+                        handleDetail = {this.handleDetail}
+                    />
+                    <input type="submit" value="Ok"/>
+                </form>
+            </div>
         )
     }
 
@@ -54,15 +58,13 @@ export default class NewSplit extends Component {
 
 
     selectChange = selected => {
-        this.setState({
-            selected
-        })
+        this.props.selectExcercisesForNewSplit(selected)
     }
 
     onSubmit = (ev) => {
         ev.preventDefault()
-        const { addSplit } = this.props
-        const { date, selected } = this.state
+        const { addSplit, selected } = this.props
+        const { date } = this.state
         if (!date || !selected) return
         const selectedExcercises = selected.map(sel => ({
             id: sel.value,
@@ -84,3 +86,10 @@ export default class NewSplit extends Component {
         })
     }
 }
+
+export default connect((state) => {
+    const { date, selected, countOfDetails } = state.newSplitState
+    return {
+        date, selected, countOfDetails
+    }
+}, {selectExcercisesForNewSplit})(NewSplit)

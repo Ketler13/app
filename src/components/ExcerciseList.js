@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { excercises } from '../fixtures'
 import Excercise from './Excercise'
+import Filter from './Filters'
 import { deleteExcercise } from '../AC'
 import accordion from '../decorators/accordion'
 import { connect } from 'react-redux'
@@ -30,6 +31,7 @@ class ExcerciseList extends Component {
         return (
             <div>
                 <h2>Excercise list</h2>
+                <Filter/>
                 <ul>{excerciseElements}</ul>
             </div>
         )

@@ -7,7 +7,7 @@ import { mapToArray } from '../helpers'
 
 class Diary extends Component {
     render() {
-        const { diary, addSplit, excercises} = this.props
+        const { diary, addSplit, excercises, newSplit } = this.props
         const splits = diary.map(split => {
             return (
                 <li key = {split.id}>
@@ -23,6 +23,7 @@ class Diary extends Component {
             <div>
                 <h2>Your diary</h2>
                 <NewSplit addSplit = {addSplit} excercises = {excercises}/>
+                <h3>Your splits</h3>
                 <ul>{splits}</ul>
             </div>
         )
