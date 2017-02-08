@@ -1,10 +1,10 @@
-import { SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
+import { SET_DEFAULT_STATE, SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
 SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS, ADD, REMOVE } from '../constants'
 import {} from '../helpers'
 import { Record, OrderedMap } from 'immutable'
 
 const StateModel = Record({
-    date: "",
+    date: '',
     selected: null,
     countOfDetails: new OrderedMap({})
 })
@@ -13,6 +13,12 @@ export default (state = new StateModel({}), action) => {
     const { type, payload } = action
 
     switch(type) {
+        case SET_DEFAULT_STATE:
+            return state
+                    .set('date', '')
+                    .set('selected', null)
+                    .set('countOfDetails', new OrderedMap({...payload.count}))
+
         case SELECT_EXCERCISES_FOR_NEW_SPLIT:
             return state.set('selected', payload.selected)
 

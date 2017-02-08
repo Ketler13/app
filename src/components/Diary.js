@@ -2,12 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Split from './Split'
 import NewSplit from './NewSplit'
-import {addSplit} from '../AC'
 import { mapToArray } from '../helpers'
 
 class Diary extends Component {
     render() {
-        const { diary, addSplit, excercises, newSplit } = this.props
+        const { diary, excercises, newSplit } = this.props
         const splits = diary.map(split => {
             return (
                 <li key = {split.id}>
@@ -22,7 +21,7 @@ class Diary extends Component {
         return (
             <div>
                 <h2>Your diary</h2>
-                <NewSplit addSplit = {addSplit} excercises = {excercises}/>
+                <NewSplit excercises = {excercises}/>
                 <h3>Your splits</h3>
                 <ul>{splits}</ul>
             </div>
@@ -35,4 +34,4 @@ export default connect((state) => {
         diary: mapToArray(state.diary),
         excercises: mapToArray(state.excercises)
     }
-}, {addSplit})(Diary)
+})(Diary)

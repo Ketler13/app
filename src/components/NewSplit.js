@@ -2,16 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
 import { connect } from 'react-redux'
+import { getDefaultCountOfDetails } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
-         setDefaultCountOfDetails, setCountOfDetails } from '../AC/newSplitAC'
+         setDefaultCountOfDetails, setCountOfDetails, addSplit,
+         setDefaultState } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
     componentDidMount() {
-        let countOfDetails = {}
-        let currentCountsForDetailForms = {}
-        this.props.excercises.forEach((exc) => {
-            countOfDetails[exc.title] = []
-        })
+        const countOfDetails = getDefaultCountOfDetails(this.props.excercises)
         this.props.setDefaultCountOfDetails(countOfDetails)
     }
 
@@ -60,17 +58,14 @@ class NewSplit extends Component {
 
     onSubmit = (ev) => {
         ev.preventDefault()
-        const { addSplit, selected, date } = this.props
+        const { selected, date, addSplit, setDefaultState } = this.props
         if (!date || !selected) return
         const selectedExcercises = selected.map(sel => ({
             id: sel.value,
             name: sel.label
         }))
         addSplit(date, selectedExcercises)
-        this.setState({
-            date: "",
-            selected: null
-        })
+        setDefaultState(getDefaultCountOfDetails(this.props.excercises))
     }
 }
 
@@ -83,5 +78,7 @@ export default connect((state) => {
     selectExcercisesForNewSplit,
     selectDateForNewSplit,
     setDefaultCountOfDetails,
-    setCountOfDetails
+    setCountOfDetails,
+    addSplit,
+    setDefaultState
 })(NewSplit)
