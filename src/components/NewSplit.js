@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
 import { connect } from 'react-redux'
-import { selectExcercisesForNewSplit } from '../AC/newSplitAC'
+import { selectExcercisesForNewSplit, selectDateForNewSplit,
+         setDefaultCountOfDetails, setCountOfDetails } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
     state = {
-        date: "",
         countOfDetails: {}
     }
 
@@ -19,6 +19,7 @@ class NewSplit extends Component {
         this.setState({
             countOfDetails: {...countOfDetails}
         })
+        this.props.setDefaultCountOfDetails(countOfDetails)
     }
 
     render() {
@@ -31,7 +32,7 @@ class NewSplit extends Component {
             <div>
                 <h3>Add new split to diary</h3>
                 <form onSubmit = {this.onSubmit}>
-                    <input type="date" value={this.state.date} onChange={this.handleChange("date")}/>
+                    <input type="date" value={date} onChange={this.handleChange}/>
                     <Select
                         options={options}
                         value={selected}
@@ -49,16 +50,24 @@ class NewSplit extends Component {
         )
     }
 
-    handleChange = field => ev => {
+    handleChange = ev => {
         ev.preventDefault()
-        this.setState({
-            [field]: ev.target.value
-        })
+        this.props.selectDateForNewSplit(ev.target.value)
     }
 
 
     selectChange = selected => {
         this.props.selectExcercisesForNewSplit(selected)
+    }
+
+    handleDetail = ev => {
+        const { name, value } = ev.target
+        this.props.setCountOfDetails(name, 3)
+        this.setState({
+            countOfDetails: {
+                ...this.state.countOfDetails,
+                [name]: (value === "+") ? this.state.countOfDetails[name].concat(1) : this.state.countOfDetails[name].slice(0, -1)}
+        })
     }
 
     onSubmit = (ev) => {
@@ -76,15 +85,6 @@ class NewSplit extends Component {
             selected: null
         })
     }
-
-    handleDetail = ev => {
-        const { name, value } = ev.target
-        this.setState({
-            countOfDetails: {
-                ...this.state.countOfDetails,
-                [name]: (value === "+") ? this.state.countOfDetails[name].concat(1) : this.state.countOfDetails[name].slice(0, -1)}
-        })
-    }
 }
 
 export default connect((state) => {
@@ -92,4 +92,9 @@ export default connect((state) => {
     return {
         date, selected, countOfDetails
     }
-}, {selectExcercisesForNewSplit})(NewSplit)
+}, {
+    selectExcercisesForNewSplit,
+    selectDateForNewSplit,
+    setDefaultCountOfDetails,
+    setCountOfDetails
+})(NewSplit)
