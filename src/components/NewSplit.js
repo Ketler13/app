@@ -9,6 +9,12 @@ import { selectExcercisesForNewSplit, selectDateForNewSplit,
 
 class NewSplit extends Component {
     componentDidMount() {
+        /*
+        getDefaultCountOfDetails returns object with empty arrays as values
+        and excercise titles as keys.
+        setDefaultCountOfDetails updates countOfDetails in store.newSplitState
+        to default
+        */
         const countOfDetails = getDefaultCountOfDetails(this.props.excercises)
         this.props.setDefaultCountOfDetails(countOfDetails)
     }
@@ -41,16 +47,24 @@ class NewSplit extends Component {
         )
     }
 
+    /*
+        sets date value in reducer
+    */
     handleChange = ev => {
         ev.preventDefault()
         this.props.selectDateForNewSplit(ev.target.value)
     }
 
-
+    /*
+        sets array of selected excercises in reducer
+    */
     selectChange = selected => {
         this.props.selectExcercisesForNewSplit(selected)
     }
 
+    /*
+        handles details for every excercise, depends on button value (add/remove)
+    */
     handleDetail = ev => {
         const { name, value } = ev.target
         this.props.setCountOfDetails(name, value)
@@ -65,6 +79,10 @@ class NewSplit extends Component {
             name: sel.label
         }))
         addSplit(date, selectedExcercises)
+        /*
+            after successful adding new split to database returns reducer
+            to default state like componentDidMount just've worked
+        */
         setDefaultState(getDefaultCountOfDetails(this.props.excercises))
     }
 }

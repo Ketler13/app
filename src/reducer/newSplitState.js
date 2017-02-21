@@ -1,12 +1,13 @@
 import { SET_DEFAULT_STATE, SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
-SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS, ADD, REMOVE } from '../constants'
+SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS, HANDLE_SETS_IN_NEW_SPLIT, ADD, REMOVE } from '../constants'
 import {} from '../helpers'
 import { Record, OrderedMap } from 'immutable'
 
 const StateModel = Record({
     date: '',
     selected: null,
-    countOfDetails: new OrderedMap({})
+    countOfDetails: new OrderedMap({}),
+    sets: new OrderedMap({})
 })
 
 export default (state = new StateModel({}), action) => {
@@ -29,7 +30,8 @@ export default (state = new StateModel({}), action) => {
             return state.set('countOfDetails', new OrderedMap({...payload.count}))
 
         case SET_COUNT_OF_DETAILS + ADD:
-            return state.updateIn(['countOfDetails', payload.name], arr => arr.concat(1))
+            return state
+                    .updateIn(['countOfDetails', payload.name], arr => arr.concat(1))
 
         case SET_COUNT_OF_DETAILS + REMOVE:
             return state.updateIn(['countOfDetails', payload.name], arr => arr.slice(0, -1))

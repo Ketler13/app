@@ -1,5 +1,6 @@
 import { SET_DEFAULT_STATE, SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
-SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS, ADD, REMOVE, ADD_SPLIT } from '../constants'
+SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS, ADD, REMOVE, ADD_SPLIT,
+HANDLE_SETS_IN_NEW_SPLIT } from '../constants'
 
 export function selectExcercisesForNewSplit(selected) {
     return {
@@ -42,6 +43,15 @@ export function setDefaultState(count) {
         type: SET_DEFAULT_STATE,
         payload: {
             count
+        }
+    }
+}
+
+export function handleSetsInNewSplit(config) {
+    return {
+        type: HANDLE_SETS_IN_NEW_SPLIT,
+        payload: {
+            ...config
         }
     }
 }
