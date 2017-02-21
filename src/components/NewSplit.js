@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
 import { connect } from 'react-redux'
+import { mapToArray } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
-         addSplit } from '../AC/newSplitAC'
+         addSetInNewSplit, addSplit } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
     render() {
-        const { excercises, date, selected } = this.props
+        const { excercises, date, selected, addSetInNewSplit } = this.props
         const options = excercises.map(exc => ({
             label: exc.title,
             value: exc.id
@@ -26,6 +27,7 @@ class NewSplit extends Component {
                 </form>
                 <NewSplitDetails
                     selected = {selected}
+                    addSetInNewSplit = {addSetInNewSplit}
                 />
                 <button onClick = {this.onSubmit}>OK</button>
             </div>
@@ -49,24 +51,20 @@ class NewSplit extends Component {
 
     onSubmit = (ev) => {
         ev.preventDefault()
-        console.log("yes")
-        const { selected, date, addSplit, setDefaultState } = this.props
+        const { date, selected, addSplit, newSplitExcercises } = this.props
         if (!date || !selected) return
-        const selectedExcercises = selected.map(sel => ({
-            id: sel.value,
-            name: sel.label
-        }))
-        addSplit(date, selectedExcercises)
+        addSplit(date, mapToArray(newSplitExcercises))
     }
 }
 
 export default connect((state) => {
-    const { date, selected } = state.newSplitState
+    const { date, selected, newSplitExcercises } = state.newSplitState
     return {
-        date, selected
+        date, selected, newSplitExcercises
     }
 }, {
     selectExcercisesForNewSplit,
     selectDateForNewSplit,
+    addSetInNewSplit,
     addSplit
 })(NewSplit)

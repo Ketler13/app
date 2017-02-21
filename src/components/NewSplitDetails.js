@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import DetailForm from './DetailForm'
-import { addSetInNewSplit } from '../AC/newSplitAC'
-import { connect } from 'react-redux'
 
 function NewSplitDetails(props) {
     /*
@@ -18,6 +16,7 @@ function NewSplitDetails(props) {
                 <p>{sel.label}</p>
                 <DetailForm
                     currentExcercise = {sel.label}
+                    excerciseId = {sel.value}
                     addSetInNewSplit = {addSetInNewSplit}
                 />
             </li>
@@ -28,8 +27,4 @@ function NewSplitDetails(props) {
     )
 }
 
-export default connect((state) => {
-    return {
-        sets: state.newSplitState.sets
-    }
-}, {addSetInNewSplit})(NewSplitDetails)
+export default NewSplitDetails
