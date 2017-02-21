@@ -22,14 +22,17 @@ export default class FormOfOneSet extends Component {
     }
 
     handleClick = ev => {
-        const { currentExcercise, numberOfSet, handleSetsInNewSplit } = this.props
+        const { currentExcercise, addSetInNewSplit } = this.props
         const { weight, times } = this.state
         const config = {
             currentExcercise,
-            numberOfSet,
             weight,
             times
         }
-        weight && times && handleSetsInNewSplit(config)
+        weight && times && addSetInNewSplit(config)
+        weight && times && this.setState({
+            weight: "",
+            times: ""
+        })
     }
 }

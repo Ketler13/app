@@ -2,25 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
 import { connect } from 'react-redux'
-import { getDefaultCountOfDetails } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
-         setDefaultCountOfDetails, setCountOfDetails, addSplit,
-         setDefaultState } from '../AC/newSplitAC'
+         addSplit } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
-    componentDidMount() {
-        /*
-        getDefaultCountOfDetails returns object with empty arrays as values
-        and excercise titles as keys.
-        setDefaultCountOfDetails updates countOfDetails in store.newSplitState
-        to default
-        */
-        const countOfDetails = getDefaultCountOfDetails(this.props.excercises)
-        this.props.setDefaultCountOfDetails(countOfDetails)
-    }
-
     render() {
-        const { excercises, date, selected, countOfDetails } = this.props
+        const { excercises, date, selected } = this.props
         const options = excercises.map(exc => ({
             label: exc.title,
             value: exc.id
@@ -28,21 +15,19 @@ class NewSplit extends Component {
         return (
             <div>
                 <h3>Add new split to diary</h3>
-                <form onSubmit = {this.onSubmit}>
-                    <input type="date" value={date} onChange={this.handleChange}/>
+                <form>
+                    <input type="date" value={date} onChange={this.handleDate}/>
                     <Select
                         options={options}
                         value={selected}
                         multi={true}
-                        onChange={this.selectChange}
+                        onChange={this.handleSelect}
                     />
-                    <NewSplitDetails
-                        selected = {selected}
-                        countOfDetails = {countOfDetails}
-                        handleDetail = {this.handleDetail}
-                    />
-                    <input type="submit" value="Ok"/>
                 </form>
+                <NewSplitDetails
+                    selected = {selected}
+                />
+                <button onClick = {this.onSubmit}>OK</button>
             </div>
         )
     }
@@ -50,7 +35,7 @@ class NewSplit extends Component {
     /*
         sets date value in reducer
     */
-    handleChange = ev => {
+    handleDate = ev => {
         ev.preventDefault()
         this.props.selectDateForNewSplit(ev.target.value)
     }
@@ -58,20 +43,13 @@ class NewSplit extends Component {
     /*
         sets array of selected excercises in reducer
     */
-    selectChange = selected => {
+    handleSelect = selected => {
         this.props.selectExcercisesForNewSplit(selected)
-    }
-
-    /*
-        handles details for every excercise, depends on button value (add/remove)
-    */
-    handleDetail = ev => {
-        const { name, value } = ev.target
-        this.props.setCountOfDetails(name, value)
     }
 
     onSubmit = (ev) => {
         ev.preventDefault()
+        console.log("yes")
         const { selected, date, addSplit, setDefaultState } = this.props
         if (!date || !selected) return
         const selectedExcercises = selected.map(sel => ({
@@ -79,24 +57,16 @@ class NewSplit extends Component {
             name: sel.label
         }))
         addSplit(date, selectedExcercises)
-        /*
-            after successful adding new split to database returns reducer
-            to default state like componentDidMount just've worked
-        */
-        setDefaultState(getDefaultCountOfDetails(this.props.excercises))
     }
 }
 
 export default connect((state) => {
-    const { date, selected, countOfDetails } = state.newSplitState
+    const { date, selected } = state.newSplitState
     return {
-        date, selected, countOfDetails
+        date, selected
     }
 }, {
     selectExcercisesForNewSplit,
     selectDateForNewSplit,
-    setDefaultCountOfDetails,
-    setCountOfDetails,
-    addSplit,
-    setDefaultState
+    addSplit
 })(NewSplit)

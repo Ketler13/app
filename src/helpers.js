@@ -14,11 +14,3 @@ export function mapToArray(immutableMap) {
 export function generateRandomId() {
     return Date.now() + Math.random()
 }
-
-export function getDefaultCountOfDetails(excercises) {
-    let countOfDetails = {}
-    excercises.forEach((exc) => {
-        countOfDetails[exc.title] = []
-    })
-    return countOfDetails
-}
