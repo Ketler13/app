@@ -1,5 +1,6 @@
 import { SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
-         ADD_SET_IN_NEW_SPLIT, ADD_SPLIT, ADD, REMOVE } from '../constants'
+         ADD_SET_IN_NEW_SPLIT, DELETE_EXCERCISE_FROM_NEW_SPLIT, ADD_SPLIT,
+         ADD, REMOVE } from '../constants'
 import {} from '../helpers'
 import { Record, OrderedMap } from 'immutable'
 
@@ -38,6 +39,10 @@ export default (state = new StateModel({}), action) => {
                             'sets': excercise.sets.concat(`${payload.weight}*${payload.times}`)
                         }
                     })
+
+        case DELETE_EXCERCISE_FROM_NEW_SPLIT:
+            return state
+                    .delete('newSplitExcercises', payload.excercise)
     }
 
     return state
