@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
+import NewSplitTooltip from './NewSplitTooltip'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
@@ -8,7 +9,7 @@ import { selectExcercisesForNewSplit, selectDateForNewSplit,
 
 class NewSplit extends Component {
     render() {
-        const { excercises, date, selected, addSetInNewSplit } = this.props
+        const { excercises, date, selected, newSplitExcercises, addSetInNewSplit } = this.props
         const options = excercises.map(exc => ({
             label: exc.title,
             value: exc.id
@@ -25,6 +26,9 @@ class NewSplit extends Component {
                         onChange={this.handleSelect}
                     />
                 </form>
+                <NewSplitTooltip
+                    newSplitExcercises = {mapToArray(newSplitExcercises)}
+                />
                 <NewSplitDetails
                     selected = {selected}
                     addSetInNewSplit = {addSetInNewSplit}
