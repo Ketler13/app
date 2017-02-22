@@ -57,6 +57,7 @@ class NewSplit extends Component {
         ev.preventDefault()
         const { date, selected, addSplit, newSplitExcercises } = this.props
         if (!date || !selected) return
+        console.log(mapToArray(newSplitExcercises))
         addSplit(date, mapToArray(newSplitExcercises))
     }
 }

@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Rater from './Rater'
 import toggleOpen from '../decorators/toggleOpen'
 
 class Split extends Component {
@@ -25,7 +26,7 @@ class Split extends Component {
         return (
             <div>
                 <ul>{excercises}</ul>
-                <p>{this.props.mark}</p>
+                <Rater rate = {Number(this.props.mark)}/>
             </div>
         )
     }

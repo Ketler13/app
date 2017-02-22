@@ -42,7 +42,7 @@ export default (state = new StateModel({}), action) => {
 
         case DELETE_EXCERCISE_FROM_NEW_SPLIT:
             return state
-                    .delete('newSplitExcercises', payload.excercise)
+                    .deleteIn(['newSplitExcercises', payload.excercise])
     }
 
     return state
