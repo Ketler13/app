@@ -1,37 +1,15 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
-import Split from './Split'
 import NewSplit from './NewSplit'
-import { mapToArray } from '../helpers'
+import Splits from './Splits'
 
-class Diary extends Component {
-    render() {
-        const { diary, excercises, newSplit } = this.props
-        const splits = diary.map(split => {
-            return (
-                <li key = {split.id}>
-                    <Split
-                        date = {split.date}
-                        excercises = {split.excercises}
-                        mark = {split.mark}
-                    />
-                </li>
-            )
-        })
-        return (
-            <div>
-                <h2>Your diary</h2>
-                <NewSplit excercises = {excercises}/>
-                <h3>Your splits</h3>
-                <ul>{splits}</ul>
-            </div>
-        )
-    }
+function Diary(props) {
+    const { excercises } = props
+    return (
+        <div>
+            <NewSplit />
+            <Splits />
+        </div>
+    )
 }
 
-export default connect((state) => {
-    return {
-        diary: mapToArray(state.diary),
-        excercises: mapToArray(state.excercises)
-    }
-})(Diary)
+export default Diary

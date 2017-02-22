@@ -16,16 +16,26 @@ class Split extends Component {
 
     getBody() {
         const excercises = this.props.excercises.map(exc => {
+            const sets = exc.sets.map((set, i) => {
+                return (
+                    <td key = {i}>
+                        <span>{set}</span>
+                    </td>
+                )
+            })
             return (
-                <li key = {exc.id}>
-                    {exc.name + ' sets: ' + exc.sets}
-                </li>
+                <tr key = {exc.id}>
+                    <th>{exc.name}</th>
+                    {sets}
+                </tr>
             )
         })
         if (!this.props.isOpen) return null
         return (
             <div>
-                <ul>{excercises}</ul>
+                <table>
+                    <tbody>{excercises}</tbody>
+                </table>
                 <Rater rate = {Number(this.props.mark)}/>
             </div>
         )

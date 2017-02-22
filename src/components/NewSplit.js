@@ -10,12 +10,13 @@ import { selectExcercisesForNewSplit, selectDateForNewSplit,
 class NewSplit extends Component {
     render() {
         const { excercises, date, selected, newSplitExcercises, addSetInNewSplit } = this.props
+        console.log(this.props)
         const options = excercises.map(exc => ({
             label: exc.title,
             value: exc.id
         }))
         return (
-            <div>
+            <div  className = "newSplit">
                 <h3>Add new split to diary</h3>
                 <form>
                     <input type="date" value={date} onChange={this.handleDate}/>
@@ -57,15 +58,15 @@ class NewSplit extends Component {
         ev.preventDefault()
         const { date, selected, addSplit, newSplitExcercises } = this.props
         if (!date || !selected) return
-        console.log(mapToArray(newSplitExcercises))
         addSplit(date, mapToArray(newSplitExcercises))
     }
 }
 
 export default connect((state) => {
     const { date, selected, newSplitExcercises } = state.newSplitState
+    const excercises = mapToArray(state.excercises)
     return {
-        date, selected, newSplitExcercises
+        excercises, date, selected, newSplitExcercises
     }
 }, {
     selectExcercisesForNewSplit,

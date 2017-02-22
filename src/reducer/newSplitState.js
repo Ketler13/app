@@ -36,7 +36,7 @@ export default (state = new StateModel({}), action) => {
                             }
                         return {
                             ...excercise,
-                            'sets': excercise.sets.concat(`${payload.weight}*${payload.times}`)
+                            'sets': excercise.sets.concat(`${payload.weight}x${payload.times}`)
                         }
                     })
 
