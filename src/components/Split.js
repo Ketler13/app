@@ -18,7 +18,7 @@ class Split extends Component {
         const excercises = this.props.excercises.map(exc => {
             const sets = exc.sets.map((set, i) => {
                 return (
-                    <td key = {i}>
+                    <td key = {i} className = "set">
                         <span>{set}</span>
                     </td>
                 )

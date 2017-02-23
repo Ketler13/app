@@ -56,6 +56,11 @@ input {
 	border: none;
 }
 
+a {
+	color: rgb(0, 177, 106);
+	text-decoration: none;
+}
+
 .menu {
 	display: flex;
 	flex: row || wrap;
@@ -75,7 +80,7 @@ input {
 	text-decoration: none;
 }
 
-.newSplit, .splits, .excercises {
+.newSplit, .splits, .excercises{
 	max-width: 960px;
 	margin: 10px auto;
 }
@@ -88,7 +93,7 @@ input {
 	border: 1px solid rgb(197, 239, 247);
 	border-radius: 5px;
 	font-size: 25px;
-	color: rgb(25, 181, 254);
+	color: rgb(197, 239, 247);
 }
 
 .newSplitTooltip {
@@ -163,4 +168,43 @@ input {
 .dateSelect {
 	max-width: 400px;
 	background-color: white;
+}
+
+.splitList {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(197, 239, 247);
+}
+
+.splitItem {
+	display: block;
+	min-width: 100px;
+	max-width: 400px;
+	margin: 5px 20px;
+	padding: 5px;
+	border-radius: 5px;
+	background-color: rgb(34, 49, 63);
+}
+
+.set {
+	padding: 0 5px;
+}
+
+.excerciseList {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+}
+
+.excercise {
+	display: block;
+	flex: 1 1 80%;
+	margin: 5px 10px;
+	padding: 5px;
+	border-radius: 5px;
+	background-color: rgb(34, 49, 63);
+	font-family: 'Source Sans Pro', sans-serif;
+	color: rgb(197, 239, 247);
 }

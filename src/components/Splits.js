@@ -7,7 +7,7 @@ function Splits(props) {
     const { diary } = props
     const splits = diary.map(split => {
         return (
-            <li key = {split.id}>
+            <li key = {split.id} className = "splitItem">
                 <Split
                     date = {split.date}
                     excercises = {split.excercises}
@@ -18,7 +18,7 @@ function Splits(props) {
     })
     return (
         <div className = "splits">
-            <ul>{splits}</ul>
+            <ul className = "splitList">{splits}</ul>
         </div>
     )
 }

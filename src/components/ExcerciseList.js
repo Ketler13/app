@@ -18,7 +18,7 @@ class ExcerciseList extends Component {
         const { excercises } = this.props
         const excerciseElements = excercises.map(excercise => {
             return (
-                 <li key = {excercise.id}>
+                 <li key = {excercise.id}  className = "excercise">
                     <Excercise
                         excercise = {excercise}
                         isOpen = {this.props.isOpen(excercise.id)}
@@ -30,9 +30,8 @@ class ExcerciseList extends Component {
         })
         return (
             <div className = "excercises">
-                <h2>Excercise list</h2>
                 <Filter/>
-                <ul>{excerciseElements}</ul>
+                <ul className = "excerciseList">{excerciseElements}</ul>
             </div>
         )
     }
