@@ -17,7 +17,7 @@ function Splits(props) {
         )
     })
     return (
-        <div>
+        <div className = "splits">
             <ul>{splits}</ul>
         </div>
     )

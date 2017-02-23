@@ -1,15 +1,16 @@
 import React, { Component, PropTypes } from 'react'
+import FaClose from 'react-icons/lib/fa/close'
 import { connect } from 'react-redux'
 import { deleteExcerciseFromNewSplit } from '../AC/newSplitAC'
 
 class NewSplitTooltip extends Component {
     render() {
         const tooltips = this.props.newSplitExcercises.map(excercise => {
-            const sets = excercise.sets.join('')
+            const sets = excercise.sets.join(' ')
             return (
-                <span key = {excercise.id}>
+                <span className = "newSplitTooltip" key = {excercise.id}>
                     {excercise.name}: {sets}
-                    <span onClick = {this.deleteTooltip(excercise.name)}>X</span>
+                    <span onClick = {this.deleteTooltip(excercise.name)}><FaClose/></span>
                 </span>
             )
         })

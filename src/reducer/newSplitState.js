@@ -32,7 +32,7 @@ export default (state = new StateModel({}), action) => {
                         if (!excercise) return {
                                 'name': payload.currentExcercise,
                                 'id': payload.excerciseId,
-                                'sets': [`${payload.weight}*${payload.times}`]
+                                'sets': [`${payload.weight}x${payload.times}`]
                             }
                         return {
                             ...excercise,

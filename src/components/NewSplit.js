@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
 import NewSplitTooltip from './NewSplitTooltip'
+import FaPlus from 'react-icons/lib/fa/plus'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
@@ -10,16 +11,14 @@ import { selectExcercisesForNewSplit, selectDateForNewSplit,
 class NewSplit extends Component {
     render() {
         const { excercises, date, selected, newSplitExcercises, addSetInNewSplit } = this.props
-        console.log(this.props)
         const options = excercises.map(exc => ({
             label: exc.title,
             value: exc.id
         }))
         return (
             <div  className = "newSplit">
-                <h3>Add new split to diary</h3>
                 <form>
-                    <input type="date" value={date} onChange={this.handleDate}/>
+                    <input className = "dateInput" type="date" value={date} onChange={this.handleDate}/>
                     <Select
                         options={options}
                         value={selected}
@@ -34,7 +33,7 @@ class NewSplit extends Component {
                     selected = {selected}
                     addSetInNewSplit = {addSetInNewSplit}
                 />
-                <button onClick = {this.onSubmit}>OK</button>
+                <button className = "newSplitSubmitButton" onClick = {this.onSubmit}><FaPlus/></button>
             </div>
         )
     }
@@ -57,8 +56,9 @@ class NewSplit extends Component {
     onSubmit = (ev) => {
         ev.preventDefault()
         const { date, selected, addSplit, newSplitExcercises } = this.props
-        if (!date || !selected) return
-        addSplit(date, mapToArray(newSplitExcercises))
+        const newSplit = mapToArray(newSplitExcercises)
+        if (!date || !selected || !newSplit.length) return
+        addSplit(date, newSplit)
     }
 }
 

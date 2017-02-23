@@ -29,7 +29,7 @@ class ExcerciseList extends Component {
             )
         })
         return (
-            <div>
+            <div className = "excercises">
                 <h2>Excercise list</h2>
                 <Filter/>
                 <ul>{excerciseElements}</ul>

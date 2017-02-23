@@ -12,7 +12,7 @@ function NewSplitDetails(props) {
     */
     const detailItems = props.selected.map(sel => {
         return (
-            <li key = {sel.value}>
+            <li className = "detailItem" key = {sel.value}>
                 <p>{sel.label}</p>
                 <DetailForm
                     currentExcercise = {sel.label}
@@ -23,7 +23,7 @@ function NewSplitDetails(props) {
         )
     })
     return (
-        <ul>{detailItems}</ul>
+        <ul className = "details">{detailItems}</ul>
     )
 }
 

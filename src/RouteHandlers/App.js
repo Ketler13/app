@@ -9,9 +9,9 @@ export default function App(props) {
         <Provider store = {store}>
             <div>
                 <Menu>
-                    <MenuItem path="/newsplit"/>
-                    <MenuItem path="/splits"/>
-                    <MenuItem path="/excercises"/>
+                    <MenuItem name = "Add new split" path="/newsplit"/>
+                    <MenuItem name = "Training diary" path="/splits"/>
+                    <MenuItem name = "Excercises" path="/excercises"/>
                 </Menu>
                 {props.children}
             </div>

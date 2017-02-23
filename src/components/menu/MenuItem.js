@@ -4,8 +4,8 @@ import {Link} from 'react-router'
 function MenuItem(props) {
     const { path, name } = props
         return (
-            <li>
-                <Link to={path} activeStyle={{color: 'red'}} activeClassName="active">{name || path}</Link>
+            <li className = "menuItem">
+                <Link to={path} activeStyle={{color: "rgb(25, 181, 254)"}} activeClassName="active">{name || path}</Link>
             </li>
         )
 }
