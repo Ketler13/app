@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
 import NewSplitTooltip from './NewSplitTooltip'
+import DatePickerForm from './DatePickerForm'
 import FaPlus from 'react-icons/lib/fa/plus'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
@@ -17,8 +18,12 @@ class NewSplit extends Component {
         }))
         return (
             <div  className = "newSplit">
+                <DatePickerForm
+                    selectDateForNewSplit = {this.props.selectDateForNewSplit}
+                    date = {date}
+                />
                 <form>
-                    <input className = "dateInput" type="date" value={date} onChange={this.handleDate}/>
+
                     <Select
                         options={options}
                         value={selected}

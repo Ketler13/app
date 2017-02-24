@@ -5,7 +5,7 @@ import {} from '../helpers'
 import { Record, OrderedMap } from 'immutable'
 
 const StateModel = Record({
-    date: '',
+    date: null,
     selected: null,
     newSplitExcercises: new OrderedMap({})
 })
@@ -16,7 +16,7 @@ export default (state = new StateModel({}), action) => {
     switch(type) {
         case ADD_SPLIT:
             return state
-                    .set('date', '')
+                    .set('date', null)
                     .set('selected', null)
                     .set('newSplitExcercises', new OrderedMap({}))
 

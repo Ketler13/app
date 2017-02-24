@@ -8,7 +8,7 @@ class Split extends Component {
 
         return (
             <div>
-                <p onClick={toggleOpen}>{date}</p>
+                <p onClick={toggleOpen}>{String(date)}</p>
                 {this.getBody()}
             </div>
         )

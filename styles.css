@@ -60,6 +60,9 @@ a {
 	color: rgb(0, 177, 106);
 	text-decoration: none;
 }
+ul, li {
+	list-style-type: none;
+}
 
 .menu {
 	display: flex;
