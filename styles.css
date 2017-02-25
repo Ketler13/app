@@ -69,3 +69,9 @@ ul, li {
 	flex-flow: row wrap;
 	justify-content: flex-start;
 }
+
+.tooltipWrapper {
+	display: flex;
+	width: 100%;
+	flex-flow: row wrap;
+}

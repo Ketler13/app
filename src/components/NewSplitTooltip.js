@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import FaClose from 'react-icons/lib/fa/close'
+import Chip from 'material-ui/Chip';
 import { connect } from 'react-redux'
 import { deleteExcerciseFromNewSplit } from '../AC/newSplitAC'
 
@@ -8,14 +9,19 @@ class NewSplitTooltip extends Component {
         const tooltips = this.props.newSplitExcercises.map(excercise => {
             const sets = excercise.sets.join(' ')
             return (
-                <span className = "newSplitTooltip" key = {excercise.id}>
+                <Chip
+                    key = {excercise.id}
+                    onRequestDelete={this.deleteTooltip(excercise.name)}
+                    style = {{
+                        margin: '4px',
+                    }}
+                >
                     {excercise.name}: {sets}
-                    <span onClick = {this.deleteTooltip(excercise.name)}><FaClose/></span>
-                </span>
+                </Chip>
             )
         })
         if (!tooltips || !tooltips.length) return null
-        return <p>{tooltips}</p>
+        return <div className = 'tooltipWrapper'>{tooltips}</div>
     }
 
     deleteTooltip = name => () => {
