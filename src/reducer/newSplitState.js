@@ -9,7 +9,6 @@ const StateModel = Record({
     'date': null,
     'selected': null,
     'excerciseSelectIsOpen': false,
-    'datePickerIsOpen':false,
     'snackBarIsOpen': false,
     'newSplitExcercises': new OrderedMap({})
 })
@@ -55,11 +54,6 @@ export default (state = new StateModel({}), action) => {
         case CLOSE_EXCERCISE_SELECT:
             return state.set('excerciseSelectIsOpen', false)
 
-        case OPEN_DATE_PICKER:
-            return state.set('datePickerIsOpen', true)
-
-        case CLOSE_DATE_PICKER:
-            return state.set('datePickerIsOpen', false)
     }
 
     return state

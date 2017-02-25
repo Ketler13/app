@@ -58,7 +58,6 @@ export function openNewSplitModal(modalName) {
 }
 
 export function closeNewSplitModal(modalName) {
-    console.log('modal')
     return {
         type: 'CLOSE_' + modalName
     }

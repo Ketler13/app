@@ -31,14 +31,6 @@ class NewSplit extends Component {
                 onTouchTap={this.handleClose('EXCERCISE_SELECT')}
             />,
         ]
-        const actions2 = [
-            <FlatButton
-                label="Ok"
-                primary={true}
-                keyboardFocused={true}
-                onTouchTap={this.handleClose('DATE_PICKER')}
-            />,
-        ]
         const { excercises, date, selected, newSplitExcercises, addSetInNewSplit } = this.props
         const options = excercises.map(exc => ({
             label: exc.title,
@@ -46,21 +38,12 @@ class NewSplit extends Component {
         }))
         return (
             <div  className = "newSplit">
+                <DatePickerForm
+                    selectDateForNewSplit = {this.props.selectDateForNewSplit}
+                    date = {date}
+                />
                 <RaisedButton label="Select excercises" onTouchTap={this.handleOpen('EXCERCISE_SELECT')} />
-                <RaisedButton label="Select date" onTouchTap={this.handleOpen('DATE_PICKER')} />
                 <RaisedButton label="Add split" primary={true} onTouchTap = {this.onSubmit} />
-                <Dialog
-                    actions={actions}
-                    modal={false}
-                    open={this.props.datePickerIsOpen}
-                    onRequestClose={this.handleClose('DATE_PICKER')}
-                    autoScrollBodyContent={true}
-                >
-                    <DatePickerForm
-                        selectDateForNewSplit = {this.props.selectDateForNewSplit}
-                        date = {date}
-                    />
-                </Dialog>
                 <Dialog
                     actions={actions}
                     modal={false}
@@ -116,11 +99,11 @@ class NewSplit extends Component {
 }
 
 export default connect((state) => {
-    const { date, selected, newSplitExcercises, excerciseSelectIsOpen, datePickerIsOpen, snackBarIsOpen } = state.newSplitState
+    const { date, selected, newSplitExcercises, excerciseSelectIsOpen, snackBarIsOpen } = state.newSplitState
     const excercises = mapToArray(state.excercises)
     return {
         excercises, date, selected, newSplitExcercises, excerciseSelectIsOpen,
-        datePickerIsOpen, snackBarIsOpen
+        snackBarIsOpen
     }
 }, {
     selectExcercisesForNewSplit,
