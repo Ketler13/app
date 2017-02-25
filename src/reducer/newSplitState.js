@@ -1,14 +1,17 @@
 import { SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
          ADD_SET_IN_NEW_SPLIT, DELETE_EXCERCISE_FROM_NEW_SPLIT, ADD_SPLIT,
-         ADD, REMOVE } from '../constants'
+         ADD, REMOVE, OPEN_EXCERCISE_SELECT, CLOSE_EXCERCISE_SELECT,
+         OPEN_DATE_PICKER, CLOSE_DATE_PICKER } from '../constants'
 import {} from '../helpers'
 import { Record, OrderedMap } from 'immutable'
 
 const StateModel = Record({
-    date: null,
-    selected: null,
-    snackBarIsOpen: false,
-    newSplitExcercises: new OrderedMap({})
+    'date': null,
+    'selected': null,
+    'excerciseSelectIsOpen': false,
+    'datePickerIsOpen':false,
+    'snackBarIsOpen': false,
+    'newSplitExcercises': new OrderedMap({})
 })
 
 export default (state = new StateModel({}), action) => {
@@ -45,6 +48,18 @@ export default (state = new StateModel({}), action) => {
         case DELETE_EXCERCISE_FROM_NEW_SPLIT:
             return state
                     .deleteIn(['newSplitExcercises', payload.excercise])
+
+        case OPEN_EXCERCISE_SELECT:
+            return state.set('excerciseSelectIsOpen', true)
+
+        case CLOSE_EXCERCISE_SELECT:
+            return state.set('excerciseSelectIsOpen', false)
+
+        case OPEN_DATE_PICKER:
+            return state.set('datePickerIsOpen', true)
+
+        case CLOSE_DATE_PICKER:
+            return state.set('datePickerIsOpen', false)
     }
 
     return state

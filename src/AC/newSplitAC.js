@@ -1,6 +1,8 @@
 import { SET_DEFAULT_STATE, SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
 SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS, ADD, REMOVE, ADD_SPLIT,
-ADD_SET_IN_NEW_SPLIT, DELETE_EXCERCISE_FROM_NEW_SPLIT } from '../constants'
+ADD_SET_IN_NEW_SPLIT, DELETE_EXCERCISE_FROM_NEW_SPLIT,
+OPEN_EXCERCISE_SELECT, CLOSE_EXCERCISE_SELECT, OPEN_DATE_PICKER,
+CLOSE_DATE_PICKER } from '../constants'
 
 export function selectExcercisesForNewSplit(selected) {
     return {
@@ -46,5 +48,17 @@ export function addSplit(date, excercises) {
             excercises
         },
         generateId: true
+    }
+}
+
+export function openNewSplitModal(modalName) {
+    return {
+        type: 'OPEN_' + modalName
+    }
+}
+
+export function closeNewSplitModal(modalName) {
+    return {
+        type: 'CLOSE_' + modalName
     }
 }

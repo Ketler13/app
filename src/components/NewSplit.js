@@ -10,18 +10,21 @@ import Snackbar from 'material-ui/Snackbar'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
-         addSetInNewSplit, addSplit } from '../AC/newSplitAC'
+         addSetInNewSplit, addSplit, openNewSplitModal, closeNewSplitModal
+       } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
     state = {
         open: false,
     }
 
-    handleOpen = () => {
+    handleOpen = modalName => () => {
+        this.props.openNewSplitModal(modalName)
         this.setState({open: true});
     }
 
-    handleClose = () => {
+    handleClose = modalName => () => {
+        this.props.closeNewSplitModal(modalName)
         this.setState({open: false});
     }
 
@@ -31,7 +34,7 @@ class NewSplit extends Component {
                 label="Ok"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.handleClose}
+                onTouchTap={this.handleClose('EXCERCISE_SELECT')}
             />,
         ]
         const { excercises, date, selected, newSplitExcercises, addSetInNewSplit } = this.props
@@ -45,14 +48,13 @@ class NewSplit extends Component {
                     selectDateForNewSplit = {this.props.selectDateForNewSplit}
                     date = {date}
                 />
-                <RaisedButton label="Select excercises" onTouchTap={this.handleOpen} />
+                <RaisedButton label="Select excercises" onTouchTap={this.handleOpen('EXCERCISE_SELECT')} />
                 <RaisedButton label="Add split" primary={true} onTouchTap = {this.onSubmit} />
                 <Dialog
-                    title="Dialog With Date Picker"
                     actions={actions}
                     modal={false}
-                    open={this.state.open}
-                    onRequestClose={this.handleClose}
+                    open={this.props.excerciseSelectIsOpen}
+                    onRequestClose={this.handleClose('EXCERCISE_SELECT')}
                     autoScrollBodyContent={true}
                 >
                     <Select
@@ -103,14 +105,17 @@ class NewSplit extends Component {
 }
 
 export default connect((state) => {
-    const { date, selected, newSplitExcercises, snackBarIsOpen } = state.newSplitState
+    const { date, selected, newSplitExcercises, excerciseSelectIsOpen, datePickerIsOpen, snackBarIsOpen } = state.newSplitState
     const excercises = mapToArray(state.excercises)
     return {
-        excercises, date, selected, newSplitExcercises, snackBarIsOpen
+        excercises, date, selected, newSplitExcercises, excerciseSelectIsOpen,
+        datePickerIsOpen, snackBarIsOpen
     }
 }, {
     selectExcercisesForNewSplit,
     selectDateForNewSplit,
     addSetInNewSplit,
-    addSplit
+    addSplit,
+    openNewSplitModal,
+    closeNewSplitModal
 })(NewSplit)
