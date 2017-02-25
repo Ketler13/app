@@ -1,15 +1,40 @@
 import React, {Component, PropTypes} from 'react'
+import Slider from 'material-ui/Slider';
 
 export default class DetailForm extends Component {
     state = {
-        weight: "",
-        times: ""
+        weight: 0,
+        times: 0
     }
+
+    handleWeightSlider = (event, value) => {
+        this.setState({weight: value})
+    }
+
+    handleTimesSlider = (event, value) => {
+        this.setState({times: value})
+    }
+
     render() {
         return (
             <div>
-                <p><input className = "detailInput" type="number" value={this.state.weight} onChange={this.handleChange("weight")}/> kg</p>
-                <p><input className = "detailInput" type="number" value={this.state.times} onChange={this.handleChange("times")}/> times</p>
+                <Slider
+                    min={0}
+                    max={200}
+                    step={1}
+                    defaultValue={50}
+                    value={this.state.weight}
+                    onChange={this.handleWeightSlider}
+                />
+                <Slider
+                    min={0}
+                    max={30}
+                    step={1}
+                    defaultValue={15}
+                    value={this.state.times}
+                    onChange={this.handleTimesSlider}
+                />
+                <p>weight {this.state.weight} times {this.state.times}</p>
                 <button onClick = {this.handleClick}>OK</button>
             </div>
         )
@@ -32,8 +57,8 @@ export default class DetailForm extends Component {
         }
         weight && times && addSetInNewSplit(config)
         weight && times && this.setState({
-            weight: "",
-            times: ""
+            weight: 0,
+            times: 0
         })
     }
 }

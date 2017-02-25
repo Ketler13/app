@@ -9,8 +9,9 @@ function NewSplitDetails(props) {
     const { selected, addSetInNewSplit } = props
     const style = {
         display: 'block',
-        maxWidth: '220px',
+        width: '300px',
         margin: '10px',
+        padding: '20px',
     }
     if (!selected || !selected.length) return null
     /*
