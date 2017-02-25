@@ -1,5 +1,4 @@
 import React, {Component, PropTypes} from 'react'
-import FaPlus from 'react-icons/lib/fa/plus'
 
 export default class DetailForm extends Component {
     state = {
@@ -11,7 +10,7 @@ export default class DetailForm extends Component {
             <div>
                 <p><input className = "detailInput" type="number" value={this.state.weight} onChange={this.handleChange("weight")}/> kg</p>
                 <p><input className = "detailInput" type="number" value={this.state.times} onChange={this.handleChange("times")}/> times</p>
-                <p><button className = "detailSubmitButton" onClick={this.handleClick}><FaPlus/></button></p>
+                <button onClick = {this.handleClick}>OK</button>
             </div>
         )
     }

@@ -3,14 +3,37 @@ import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
 import NewSplitTooltip from './NewSplitTooltip'
 import DatePickerForm from './DatePickerForm'
-import FaPlus from 'react-icons/lib/fa/plus'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
+import Snackbar from 'material-ui/Snackbar'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
          addSetInNewSplit, addSplit } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
+    state = {
+        open: false,
+    }
+
+    handleOpen = () => {
+        this.setState({open: true});
+    }
+
+    handleClose = () => {
+        this.setState({open: false});
+    }
+
     render() {
+        const actions = [
+            <FlatButton
+                label="Ok"
+                primary={true}
+                keyboardFocused={true}
+                onTouchTap={this.handleClose}
+            />,
+        ]
         const { excercises, date, selected, newSplitExcercises, addSetInNewSplit } = this.props
         const options = excercises.map(exc => ({
             label: exc.title,
@@ -22,15 +45,23 @@ class NewSplit extends Component {
                     selectDateForNewSplit = {this.props.selectDateForNewSplit}
                     date = {date}
                 />
-                <form>
-
+                <RaisedButton label="Select excercises" onTouchTap={this.handleOpen} />
+                <RaisedButton label="Add split" primary={true} onTouchTap = {this.onSubmit} />
+                <Dialog
+                    title="Dialog With Date Picker"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.open}
+                    onRequestClose={this.handleClose}
+                    autoScrollBodyContent={true}
+                >
                     <Select
                         options={options}
                         value={selected}
                         multi={true}
                         onChange={this.handleSelect}
                     />
-                </form>
+                </Dialog>
                 <NewSplitTooltip
                     newSplitExcercises = {mapToArray(newSplitExcercises)}
                 />
@@ -38,7 +69,11 @@ class NewSplit extends Component {
                     selected = {selected}
                     addSetInNewSplit = {addSetInNewSplit}
                 />
-                <button className = "newSplitSubmitButton" onClick = {this.onSubmit}><FaPlus/></button>
+                <Snackbar
+                    open={this.props.snackBarIsOpen}
+                    message="Split added to your diary"
+                    autoHideDuration={4000}
+                />
             </div>
         )
     }
@@ -68,10 +103,10 @@ class NewSplit extends Component {
 }
 
 export default connect((state) => {
-    const { date, selected, newSplitExcercises } = state.newSplitState
+    const { date, selected, newSplitExcercises, snackBarIsOpen } = state.newSplitState
     const excercises = mapToArray(state.excercises)
     return {
-        excercises, date, selected, newSplitExcercises
+        excercises, date, selected, newSplitExcercises, snackBarIsOpen
     }
 }, {
     selectExcercisesForNewSplit,

@@ -47,40 +47,15 @@ table {
 	border-spacing: 0;
 }
 
-body {
-	background: linear-gradient(90deg, rgb(34, 49, 63), rgb(52, 73, 94))
-}
-
 input {
-	background-color: rgb(197, 239, 247);
 	border: none;
 }
 
 a {
-	color: rgb(0, 177, 106);
 	text-decoration: none;
 }
 ul, li {
 	list-style-type: none;
-}
-
-.menu {
-	display: flex;
-	flex: row || wrap;
-	justify-content: center;
-}
-
-.menuItem {
-	margin: 10px 20px;
-}
-
-.menuItem a {
-	font-size: 20px;
-	color: rgb(197, 239, 247);
-	font-family: 'Bree Serif', serif;
-	font-weight: 300;
-	text-transform: uppercase;;
-	text-decoration: none;
 }
 
 .newSplit, .splits, .excercises{
@@ -88,126 +63,9 @@ ul, li {
 	margin: 10px auto;
 }
 
-.dateInput {
-	max-width: 400px;
-	margin: 5px 0;
-	padding-left: 5px;
-	background-color: transparent;
-	border: 1px solid rgb(197, 239, 247);
-	border-radius: 5px;
-	font-size: 25px;
-	color: rgb(197, 239, 247);
-}
-
-.newSplitTooltip {
-	display: inline-block;
-	margin: 5px;
-	padding-left: 3px;
-	border-radius: 3px;
-	background-color: rgb(51, 110, 123);
-	color: rgb(25, 181, 254);
-}
-
-.newSplitTooltip span {
-	color: rgb(207, 0, 15);
-}
-
-.newSplitSubmitButton {
-	background-color: transparent;
-	font-size: 24px;
-	border: none;
-	color: rgb(25, 181, 254);
-	transition: .3s color;
-}
-
-.newSplitSubmitButton:hover {
-	color: rgb(0, 177, 106);
-}
-
 .details {
 	display: flex;
 	width: 100%;
 	flex-flow: row wrap;
 	justify-content: flex-start;
-}
-
-.detailItem {
-	display: block;
-	min-width: 220px;
-	margin: 10px;
-	padding: 5px;
-	border: 1px solid rgb(197, 239, 247);
-	border-radius: 5px;
-	transition: .3s border;
-}
-
-.detailItem:hover {
-	border: 1px solid rgb(25, 181, 254);
-}
-
-.detailItem p {
-	font-family: 'Bree Serif', serif;
-	color: rgb(197, 239, 247);
-}
-
-.detailInput {
-	max-width: 60px;
-	margin: 5px 0;
-	padding-left: 5px;
-	background-color: transparent;
-	border: 1px solid rgb(197, 239, 247);
-	border-radius: 5px;
-	font-size: 25px;
-	color: rgb(25, 181, 254);
-}
-
-.detailSubmitButton {
-	background-color: transparent;
-	font-size: 20px;
-	border: none;
-	color: rgb(197, 239, 247);
-}
-
-.dateSelect {
-	max-width: 400px;
-	background-color: white;
-}
-
-.splitList {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: flex-start;
-	font-family: 'Source Sans Pro', sans-serif;
-	color: rgb(197, 239, 247);
-}
-
-.splitItem {
-	display: block;
-	min-width: 100px;
-	max-width: 400px;
-	margin: 5px 20px;
-	padding: 5px;
-	border-radius: 5px;
-	background-color: rgb(34, 49, 63);
-}
-
-.set {
-	padding: 0 5px;
-}
-
-.excerciseList {
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: flex-start;
-}
-
-.excercise {
-	display: block;
-	flex: 1 1 80%;
-	margin: 5px 10px;
-	padding: 5px;
-	border-radius: 5px;
-	background-color: rgb(34, 49, 63);
-	font-family: 'Source Sans Pro', sans-serif;
-	color: rgb(197, 239, 247);
 }
