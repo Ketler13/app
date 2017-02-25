@@ -75,3 +75,7 @@ ul, li {
 	width: 100%;
 	flex-flow: row wrap;
 }
+
+.detailFormLabel {
+	text-align: center;
+}
