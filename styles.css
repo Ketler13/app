@@ -79,3 +79,13 @@ ul, li {
 .detailFormLabel {
 	text-align: center;
 }
+
+.splits {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+}
+
+.set span {
+	padding: 0 5px;
+}
