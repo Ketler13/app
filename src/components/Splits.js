@@ -1,26 +1,28 @@
 import React, { PropTypes } from 'react'
 import Split from './Split'
+import Paper from 'material-ui/Paper'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 
 function Splits(props) {
     const { diary } = props
+    const style = {
+        margin: '10px',
+        padding: '5px',
+    }
     const splits = diary.map(split => {
         return (
-            <li key = {split.id} className = "splitItem">
+            <Paper key = {split.id} style = {style} zDepth={5} className = "splitItem">
                 <Split
                     date = {split.date}
                     excercises = {split.excercises}
                     mark = {split.mark}
                 />
-            </li>
+            </Paper>
         )
     })
-    return (
-        <div className = "splits">
-            <ul className = "splitList">{splits}</ul>
-        </div>
-    )
+    return <div className = "splits">{splits}</div>
+
 }
 
 Splits.propTypes = {

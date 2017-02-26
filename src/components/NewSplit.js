@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import Snackbar from 'material-ui/Snackbar'
 import { connect } from 'react-redux'
-import { mapToArray } from '../helpers'
+import { mapToArray, formatDate } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
          addSetInNewSplit, addSplit, openNewSplitModal, closeNewSplitModal,
          deleteExcerciseFromSelect
@@ -40,8 +40,9 @@ class NewSplit extends Component {
         ev.preventDefault()
         const { date, selected, addSplit, newSplitExcercises } = this.props
         const newSplit = mapToArray(newSplitExcercises)
+        const formattedDate = formatDate(date)
         if (!date || !selected || !newSplit.length) return
-        addSplit(date, newSplit)
+        addSplit(formattedDate, newSplit)
     }
 
     render() {

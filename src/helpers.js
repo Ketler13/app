@@ -14,3 +14,8 @@ export function mapToArray(immutableMap) {
 export function generateRandomId() {
     return Date.now() + Math.random()
 }
+
+export function formatDate(date) {
+    const formattedDate = new Date(Date.parse(date)).toISOString().split('T')[0]
+    return formattedDate
+}
