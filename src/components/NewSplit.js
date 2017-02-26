@@ -10,16 +10,38 @@ import Snackbar from 'material-ui/Snackbar'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
-         addSetInNewSplit, addSplit, openNewSplitModal, closeNewSplitModal
+         addSetInNewSplit, addSplit, openNewSplitModal, closeNewSplitModal,
+         deleteExcerciseFromSelect
        } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
-    handleOpen = modalName => () => {
+    openModal = modalName => () => {
         this.props.openNewSplitModal(modalName)
     }
 
-    handleClose = modalName => () => {
+    closeModal = modalName => () => {
         this.props.closeNewSplitModal(modalName)
+    }
+
+    closeSplitDetail = excercise => ev => {
+        this.props.deleteExcerciseFromSelect(excercise)
+    }
+
+    handleDate = ev => {
+        ev.preventDefault()
+        this.props.selectDateForNewSplit(ev.target.value)
+    }
+
+    handleSelect = selected => {
+        this.props.selectExcercisesForNewSplit(selected)
+    }
+
+    onSubmit = (ev) => {
+        ev.preventDefault()
+        const { date, selected, addSplit, newSplitExcercises } = this.props
+        const newSplit = mapToArray(newSplitExcercises)
+        if (!date || !selected || !newSplit.length) return
+        addSplit(date, newSplit)
     }
 
     render() {
@@ -28,10 +50,10 @@ class NewSplit extends Component {
                 label="Ok"
                 primary={true}
                 keyboardFocused={true}
-                onTouchTap={this.handleClose('EXCERCISE_SELECT')}
+                onTouchTap={this.closeModal('EXCERCISE_SELECT')}
             />,
         ]
-        const { excercises, date, selected, newSplitExcercises, addSetInNewSplit } = this.props
+        const { excercises, date, selected, newSplitExcercises, addSetInNewSplit, deleteExcerciseFromSelect } = this.props
         const options = excercises.map(exc => ({
             label: exc.title,
             value: exc.id
@@ -42,13 +64,13 @@ class NewSplit extends Component {
                     selectDateForNewSplit = {this.props.selectDateForNewSplit}
                     date = {date}
                 />
-                <RaisedButton label="Select excercises" onTouchTap={this.handleOpen('EXCERCISE_SELECT')} />
+                <RaisedButton label="Select excercises" onTouchTap={this.openModal('EXCERCISE_SELECT')} />
                 <RaisedButton label="Add split" primary={true} onTouchTap = {this.onSubmit} />
                 <Dialog
                     actions={actions}
                     modal={false}
                     open={this.props.excerciseSelectIsOpen}
-                    onRequestClose={this.handleClose('EXCERCISE_SELECT')}
+                    onRequestClose={this.closeModal('EXCERCISE_SELECT')}
                     autoScrollBodyContent={true}
                 >
                     <Select
@@ -64,6 +86,7 @@ class NewSplit extends Component {
                 <NewSplitDetails
                     selected = {selected}
                     addSetInNewSplit = {addSetInNewSplit}
+                    closeSplitDetail = {this.closeSplitDetail}
                 />
                 <Snackbar
                     open={this.props.snackBarIsOpen}
@@ -72,29 +95,6 @@ class NewSplit extends Component {
                 />
             </div>
         )
-    }
-
-    /*
-        sets date value in reducer
-    */
-    handleDate = ev => {
-        ev.preventDefault()
-        this.props.selectDateForNewSplit(ev.target.value)
-    }
-
-    /*
-        sets array of selected excercises in reducer
-    */
-    handleSelect = selected => {
-        this.props.selectExcercisesForNewSplit(selected)
-    }
-
-    onSubmit = (ev) => {
-        ev.preventDefault()
-        const { date, selected, addSplit, newSplitExcercises } = this.props
-        const newSplit = mapToArray(newSplitExcercises)
-        if (!date || !selected || !newSplit.length) return
-        addSplit(date, newSplit)
     }
 }
 
@@ -111,5 +111,6 @@ export default connect((state) => {
     addSetInNewSplit,
     addSplit,
     openNewSplitModal,
-    closeNewSplitModal
+    closeNewSplitModal,
+    deleteExcerciseFromSelect
 })(NewSplit)

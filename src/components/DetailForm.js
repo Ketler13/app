@@ -26,8 +26,8 @@ export default class DetailForm extends Component {
             weight,
             times
         }
-        weight && times && addSetInNewSplit(config)
-        weight && times && this.setState({
+        addSetInNewSplit(config)
+        this.setState({
             weight: 0,
             times: 0
         })
