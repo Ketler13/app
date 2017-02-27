@@ -2,7 +2,7 @@ import { SET_DEFAULT_STATE, SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW
 SET_DEFAULT_COUNT_OF_DETAILS, SET_COUNT_OF_DETAILS, ADD, REMOVE, ADD_SPLIT,
 ADD_SET_IN_NEW_SPLIT, DELETE_EXCERCISE_FROM_NEW_SPLIT,
 OPEN_EXCERCISE_SELECT, CLOSE_EXCERCISE_SELECT, OPEN_DATE_PICKER,
-CLOSE_DATE_PICKER, DELETE_EXCERCISE_FROM_SELECT } from '../constants'
+CLOSE_DATE_PICKER, DELETE_EXCERCISE_FROM_SELECT, ADD_RATE } from '../constants'
 
 export function selectExcercisesForNewSplit(selected) {
     return {
@@ -68,6 +68,16 @@ export function deleteExcerciseFromSelect(excercise) {
         type: DELETE_EXCERCISE_FROM_SELECT,
         payload: {
             excercise
+        }
+    }
+}
+
+export function addRate(id, rate) {
+    return {
+        type: ADD_RATE,
+        payload: {
+            id,
+            rate
         }
     }
 }

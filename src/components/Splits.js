@@ -3,6 +3,7 @@ import Split from './Split'
 import Paper from 'material-ui/Paper'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
+import { addRate } from '../AC/newSplitAC'
 
 function Splits(props) {
     const { diary } = props
@@ -14,9 +15,11 @@ function Splits(props) {
         return (
             <Paper key = {split.id} style = {style} zDepth={5} className = "splitItem">
                 <Split
+                    splitId = {split.id}
                     date = {split.date}
                     excercises = {split.excercises}
                     mark = {split.mark}
+                    addRate = {props.addRate}
                 />
             </Paper>
         )
@@ -37,4 +40,4 @@ export default connect((state) => {
     return {
         diary: mapToArray(state.diary)
     }
-})(Splits)
+}, {addRate})(Splits)

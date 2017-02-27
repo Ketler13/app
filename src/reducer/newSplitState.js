@@ -20,7 +20,7 @@ export default (state = new StateModel({}), action) => {
         case ADD_SPLIT:
             return state
                     .set('date', null)
-                    .set('selected', null)
+                    .set('selected', [])
                     .set('snackBarIsOpen', true)
                     .set('newSplitExcercises', new OrderedMap({}))
 
@@ -38,7 +38,8 @@ export default (state = new StateModel({}), action) => {
                         if (!excercise) return {
                                 'name': payload.currentExcercise,
                                 'id': payload.excerciseId,
-                                'sets': [`${payload.weight}x${payload.times}`]
+                                'sets': [`${payload.weight}x${payload.times}`],
+                                'mark': undefined
                             }
                         return {
                             ...excercise,

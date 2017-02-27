@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import FaClose from 'react-icons/lib/fa/close'
 import Chip from 'material-ui/Chip';
 import { connect } from 'react-redux'
 import { deleteExcerciseFromNewSplit } from '../AC/newSplitAC'
