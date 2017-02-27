@@ -3,6 +3,7 @@ import Select from 'react-select'
 import NewSplitDetails from './NewSplitDetails'
 import NewSplitTooltip from './NewSplitTooltip'
 import DatePickerForm from './DatePickerForm'
+import CustomSelect from './CustomSelect'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -32,7 +33,11 @@ class NewSplit extends Component {
         this.props.selectDateForNewSplit(ev.target.value)
     }
 
-    handleSelect = selected => {
+    handleSelect = (selected, isExcerciseSelected) => ev => {
+        if (isExcerciseSelected) {
+            this.props.deleteExcerciseFromSelect(selected.label)
+            return
+        }
         this.props.selectExcercisesForNewSplit(selected)
     }
 
@@ -74,11 +79,10 @@ class NewSplit extends Component {
                     onRequestClose={this.closeModal('EXCERCISE_SELECT')}
                     autoScrollBodyContent={true}
                 >
-                    <Select
-                        options={options}
-                        value={selected}
-                        multi={true}
-                        onChange={this.handleSelect}
+                    <CustomSelect
+                        excercises = {excercises}
+                        selected = {selected}
+                        handleSelect = {this.handleSelect}
                     />
                 </Dialog>
                 <NewSplitTooltip

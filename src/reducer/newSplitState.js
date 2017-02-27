@@ -7,7 +7,7 @@ import { Record, OrderedMap } from 'immutable'
 
 const StateModel = Record({
     'date': null,
-    'selected': null,
+    'selected': [],
     'excerciseSelectIsOpen': false,
     'snackBarIsOpen': false,
     'newSplitExcercises': new OrderedMap({})
@@ -25,7 +25,9 @@ export default (state = new StateModel({}), action) => {
                     .set('newSplitExcercises', new OrderedMap({}))
 
         case SELECT_EXCERCISES_FOR_NEW_SPLIT:
-            return state.set('selected', payload.selected)
+            return state.update('selected', selected => {
+                return selected.concat(payload.selected)
+            })
 
         case SELECT_DATE_FOR_NEW_SPLIT:
             return state.set('date', payload.date)
