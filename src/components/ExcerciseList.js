@@ -11,7 +11,8 @@ class ExcerciseList extends Component {
     static PropTypes = {
         excercises: PropTypes.array.isRequired,
         isOpenItem: PropTypes.func.isRequired,
-        toggleOpenItem: PropTypes.func.isRequired
+        toggleOpenItem: PropTypes.func.isRequired,
+        deleteExcercise: PropTypes.func.isRequired
     }
 
     render() {

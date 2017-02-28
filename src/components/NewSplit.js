@@ -12,10 +12,26 @@ import { connect } from 'react-redux'
 import { mapToArray, formatDate } from '../helpers'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
          addSetInNewSplit, addSplit, openNewSplitModal, closeNewSplitModal,
-         deleteExcerciseFromSelect
+         deleteExcerciseFromSelect,deleteExcerciseFromNewSplit
        } from '../AC/newSplitAC'
 
 class NewSplit extends Component {
+    static propTypes = {
+        excercises: PropTypes.array.isRequired,
+        date: PropTypes.object,
+        selected: PropTypes.array,
+        excerciseSelectIsOpen: PropTypes.bool,
+        snackBarIsOpen: PropTypes.bool,
+        addSetInNewSplit: PropTypes.func.isRequired,
+        deleteExcerciseFromSelect: PropTypes.func.isRequired,
+        openNewSplitModal: PropTypes.func,
+        closeNewSplitModal: PropTypes.func,
+        selectExcercisesForNewSplit: PropTypes.func,
+        selectDateForNewSplit: PropTypes.func,
+        addSplit: PropTypes.func,
+        deleteExcerciseFromNewSplit: PropTypes.func
+    }
+
     openModal = modalName => () => {
         this.props.openNewSplitModal(modalName)
     }
@@ -28,11 +44,6 @@ class NewSplit extends Component {
         this.props.deleteExcerciseFromSelect(excercise)
     }
 
-    handleDate = ev => {
-        ev.preventDefault()
-        this.props.selectDateForNewSplit(ev.target.value)
-    }
-
     handleSelect = (selected, isExcerciseSelected) => ev => {
         if (isExcerciseSelected) {
             this.props.deleteExcerciseFromSelect(selected.label)
@@ -41,12 +52,15 @@ class NewSplit extends Component {
         this.props.selectExcercisesForNewSplit(selected)
     }
 
-    onSubmit = (ev) => {
+    deleteTooltip = name => () => {
+        this.props.deleteExcerciseFromNewSplit(String(name))
+    }
+
+    onSubmit = ev => {
         ev.preventDefault()
-        const { date, selected, addSplit, newSplitExcercises } = this.props
+        const { date, addSplit, newSplitExcercises } = this.props
         const newSplit = mapToArray(newSplitExcercises)
         const formattedDate = formatDate(date)
-        if (!date || !selected || !newSplit.length) return
         addSplit(formattedDate, newSplit)
     }
 
@@ -71,7 +85,20 @@ class NewSplit extends Component {
                     date = {date}
                 />
                 <RaisedButton label="Select excercises" onTouchTap={this.openModal('EXCERCISE_SELECT')} />
-                <RaisedButton label="Add split" primary={true} onTouchTap = {this.onSubmit} />
+                <RaisedButton
+                    label="Add split"
+                    disabled = {
+                        (!date || !selected || !newSplitExcercises.size) ?
+                        true :
+                        false
+                    }
+                    primary={
+                        (!date || !selected || !newSplitExcercises.size) ?
+                        false :
+                        true
+                    }
+                    onTouchTap = {this.onSubmit}
+                />
                 <Dialog
                     actions={actions}
                     modal={false}
@@ -85,14 +112,23 @@ class NewSplit extends Component {
                         handleSelect = {this.handleSelect}
                     />
                 </Dialog>
-                <NewSplitTooltip
-                    newSplitExcercises = {mapToArray(newSplitExcercises)}
-                />
-                <NewSplitDetails
-                    selected = {selected}
-                    addSetInNewSplit = {addSetInNewSplit}
-                    closeSplitDetail = {this.closeSplitDetail}
-                />
+                {
+                    newSplitExcercises.size ?
+                    <NewSplitTooltip
+                        deleteTooltip = {this.deleteTooltip}
+                        newSplitExcercises = {mapToArray(newSplitExcercises)}
+                    /> :
+                    null
+                }
+                {
+                    selected.length ?
+                    <NewSplitDetails
+                        selected = {selected}
+                        addSetInNewSplit = {addSetInNewSplit}
+                        closeSplitDetail = {this.closeSplitDetail}
+                    /> :
+                    null
+                }
                 <Snackbar
                     open={this.props.snackBarIsOpen}
                     message="Split added to your diary"
@@ -117,5 +153,6 @@ export default connect((state) => {
     addSplit,
     openNewSplitModal,
     closeNewSplitModal,
-    deleteExcerciseFromSelect
+    deleteExcerciseFromSelect,
+    deleteExcerciseFromNewSplit
 })(NewSplit)

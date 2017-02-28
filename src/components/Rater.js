@@ -7,8 +7,7 @@ import FaStarO from 'react-icons/lib/fa/star-o'
 
 function Rater(props) {
     const { splitId, rate, addRate } = props
-    let starRate
-    starRate = ["","","","",""].map( (_, index) => {
+    const starRate = ["","","","",""].map( (_, index) => {
         const isChecked = ((index + 1) <= rate) ? true : false
         return (
             <li key = {index}>
@@ -22,34 +21,13 @@ function Rater(props) {
            )
     })
 
-    // if (addRate) {
-    //     starRate = ["","","","",""].map( (_, index) => {
-    //         return (
-    //             <span onClick = {props.handleRate(index + 1)} key = {index}>
-    //                 {((index + 1) <= props.rate) ? <FaStar/> : <FaStarO />}
-    //             </span>
-    //            )
-    //     })
-    // } else {
-    //     if ( !rate || (rate < 1) ) rate = 1
-    //     if ( rate > 5) rate = 5
-    //
-    //     starRate = ["","","","",""].map( (_, index) => {
-    //         return (
-    //             <span key = {index}>
-    //                 {((index + 1) <= rate) ? <FaStar/> : <FaStarO />}
-    //             </span>
-    //            )
-    //     })
-    // }
-
-
     return <ul style = {{display: 'flex', flexDirection: 'row wrap',}}>{starRate}</ul>
 }
 
 Rater.propTypes = {
-    rate: PropTypes.number,
-    handleRate: PropTypes.func
+    rate: PropTypes.number.isRequired,
+    splitId: PropTypes.number.isRequired,
+    addRate: PropTypes.func.isRequired
 }
 
 export default Rater

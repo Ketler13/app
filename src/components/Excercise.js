@@ -5,7 +5,8 @@ export default class Excercise extends Component {
     static propTypes = {
         excercise: PropTypes.object.isRequired,
         isOpen: PropTypes.bool,
-        onClick: PropTypes.func
+        onClick: PropTypes.func,
+        deleteExcercise: PropTypes.func
     }
 
     render() {

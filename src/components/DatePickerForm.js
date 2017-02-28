@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { PropTypes, Component } from 'react';
 import DatePicker from 'material-ui/DatePicker';
 
-export default class DatePickerExampleControlled extends React.Component {
-
+export default class DatePickerExampleControlled extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       controlledDate: null,
     };
+  }
+
+  static propTypes = {
+      selectDateForNewSplit: PropTypes.func
   }
 
   handleChange = (event, date) => {

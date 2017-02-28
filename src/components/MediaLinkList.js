@@ -8,6 +8,7 @@ import { addLink } from '../AC'
 class MediaLinkList extends Component {
     static propTypes = {
         linksIds: PropTypes.array,
+        comments: PropTypes.array,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }

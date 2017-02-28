@@ -22,4 +22,10 @@ function CustomSelect(props) {
     return <ul>{itemsForSelect}</ul>
 }
 
+CustomSelect.propTypes = {
+    excercises: PropTypes.array.isRequired,
+    selected: PropTypes.array,
+    handleSelect: PropTypes.func
+}
+
 export default CustomSelect

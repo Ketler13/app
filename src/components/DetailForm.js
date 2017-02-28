@@ -9,6 +9,12 @@ export default class DetailForm extends Component {
         times: 0
     }
 
+    static propTypes = {
+        currentExcercise: PropTypes.string.isRequired,
+        excerciseId: PropTypes.string.isRequired,
+        addSetInNewSplit: PropTypes.func
+    }
+
     handleWeightSlider = (event, value) => {
         this.setState({weight: value})
     }

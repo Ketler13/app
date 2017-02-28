@@ -30,7 +30,7 @@ class Split extends Component {
                     <tbody>{excercises}</tbody>
                 </table>
                 <Rater
-                    splitId = {this.props.splitId}
+                    splitId = {Number(this.props.splitId)}
                     rate = {Number(this.props.mark)}
                     addRate = {this.addRate}
 

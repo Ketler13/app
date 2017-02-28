@@ -1,31 +1,27 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import Chip from 'material-ui/Chip';
-import { connect } from 'react-redux'
-import { deleteExcerciseFromNewSplit } from '../AC/newSplitAC'
 
-class NewSplitTooltip extends Component {
-    render() {
-        const tooltips = this.props.newSplitExcercises.map(excercise => {
-            const sets = excercise.sets.join(' ')
-            return (
-                <Chip
-                    key = {excercise.id}
-                    onRequestDelete={this.deleteTooltip(excercise.name)}
-                    style = {{
-                        margin: '4px',
-                    }}
-                >
-                    {excercise.name}: {sets}
-                </Chip>
-            )
-        })
-        if (!tooltips || !tooltips.length) return null
-        return <div className = 'tooltipWrapper'>{tooltips}</div>
-    }
-
-    deleteTooltip = name => () => {
-        this.props.deleteExcerciseFromNewSplit(String(name))
-    }
+function NewSplitTooltip(props) {
+    const tooltips = props.newSplitExcercises.map(excercise => {
+        const sets = excercise.sets.join(' ')
+        return (
+            <Chip
+                key = {excercise.id}
+                onRequestDelete={props.deleteTooltip(excercise.name)}
+                style = {{
+                    margin: '4px',
+                }}
+            >
+                {excercise.name}: {sets}
+            </Chip>
+        )
+    })
+    return <div className = 'tooltipWrapper'>{tooltips}</div>
 }
 
-export default connect(null, {deleteExcerciseFromNewSplit})(NewSplitTooltip)
+NewSplitTooltip.propTypes = {
+    newSplitExcercises: PropTypes.array.isRequired,
+    deleteTooltip: PropTypes.func.isRequired
+}
+
+export default NewSplitTooltip
