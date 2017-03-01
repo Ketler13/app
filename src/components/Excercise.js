@@ -1,7 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import MediaLinkList from './MediaLinkList'
+import Paper from 'material-ui/Paper'
+import IconButton from 'material-ui/IconButton'
+import ContentClear from 'material-ui/svg-icons/content/clear'
+import Dialog from 'material-ui/Dialog'
+import FlatButton from 'material-ui/FlatButton'
+import modal from '../decorators/modal'
 
-export default class Excercise extends Component {
+class Excercise extends Component {
     static propTypes = {
         excercise: PropTypes.object.isRequired,
         isOpen: PropTypes.bool,
@@ -11,12 +17,55 @@ export default class Excercise extends Component {
 
     render() {
         const { excercise, onClick, handleDelete } = this.props
+        const style = {
+            paper: {
+                padding: '10px',
+                position: 'relative',
+            },
+            button: {
+                position: 'absolute',
+                top: '-5px',
+                right: '5px',
+            },
+            icon : {
+                color: 'rgb(207, 0, 15)',
+            }
+
+        }
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onTouchTap={this.props.handleClose}
+            />,
+            <FlatButton
+                label="Delete"
+                primary={true}
+                keyboardFocused={true}
+                onTouchTap={this.handleDelete(this.props.excercise.id)}
+            />,
+        ];
+
         return (
-            <div>
+            <Paper zDepth={5} style = {style.paper}>
                 <h3 onClick = {onClick}>{excercise.title}</h3>
-                <a href="#" onClick = {this.handleDelete(excercise.id)}>delete excercise</a>
+                <IconButton
+                    style = {style.button}
+                    iconStyle = {style.icon}
+                    onTouchTap = {this.props.handleOpen}
+                >
+                    <ContentClear />
+                </IconButton>
+                <Dialog
+                    title="You want to delete excercise from list"
+                    actions={actions}
+                    modal={true}
+                    open={this.props.open}
+                >
+                    Are you sure?
+                </Dialog>
                 {this.getBody()}
-            </div>
+            </Paper>
         )
     }
 
@@ -32,6 +81,9 @@ export default class Excercise extends Component {
 
     handleDelete = id => ev => {
         ev.preventDefault()
+        this.props.handleClose()
         this.props.deleteExcercise(id)
     }
 }
+
+export default modal(Excercise)

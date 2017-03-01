@@ -16,10 +16,22 @@ class ExcerciseList extends Component {
     }
 
     render() {
+        const style = {
+            container: {
+                display: 'flex',
+                flexFlow: 'column nowrap',
+                justifyContent: 'flexStart',
+                alignItems: 'center',
+            },
+            item: {
+                margin: '10px 0',
+                width: '70%',
+            }
+        }
         const { excercises } = this.props
         const excerciseElements = excercises.map(excercise => {
             return (
-                 <li key = {excercise.id}  className = "excercise">
+                 <li key = {excercise.id}  style = {style.item}>
                     <Excercise
                         excercise = {excercise}
                         isOpen = {this.props.isOpen(excercise.id)}
@@ -32,7 +44,7 @@ class ExcerciseList extends Component {
         return (
             <div className = "excercises">
                 <Filter/>
-                <ul className = "excerciseList">{excerciseElements}</ul>
+                <ul style = {style.container}>{excerciseElements}</ul>
             </div>
         )
     }
