@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import { excercises } from '../fixtures'
 import Excercise from './Excercise'
 import Filter from './Filters'
-import { deleteExcercise } from '../AC'
 import accordion from '../decorators/accordion'
+import { deleteExcercise } from '../AC'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 
@@ -28,8 +28,8 @@ class ExcerciseList extends Component {
                 width: '70%',
             }
         }
-        const { excercises } = this.props
-        const excerciseElements = excercises.map(excercise => {
+
+        const excercises = this.props.excercises.map(excercise => {
             return (
                  <li key = {excercise.id}  style = {style.item}>
                     <Excercise
@@ -44,7 +44,7 @@ class ExcerciseList extends Component {
         return (
             <div className = "excercises">
                 <Filter/>
-                <ul style = {style.container}>{excerciseElements}</ul>
+                <ul style = {style.container}>{excercises}</ul>
             </div>
         )
     }

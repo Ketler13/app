@@ -15,6 +15,22 @@ class Excercise extends Component {
         deleteExcercise: PropTypes.func
     }
 
+    handleDelete = id => ev => {
+        ev.preventDefault()
+        this.props.handleClose()
+        this.props.deleteExcercise(id)
+    }
+
+    getBody = () => {
+        if (!this.props.isOpen) return null
+        return (
+            <section>
+                {this.props.excercise.text}
+                <MediaLinkList excercise = {this.props.excercise} linksIds = {this.props.excercise.comments} />
+            </section>
+        )
+    }
+
     render() {
         const { excercise, onClick, handleDelete } = this.props
         const style = {
@@ -44,7 +60,7 @@ class Excercise extends Component {
                 keyboardFocused={true}
                 onTouchTap={this.handleDelete(this.props.excercise.id)}
             />,
-        ];
+        ]
 
         return (
             <Paper zDepth={5} style = {style.paper}>
@@ -57,32 +73,16 @@ class Excercise extends Component {
                     <ContentClear />
                 </IconButton>
                 <Dialog
-                    title="You want to delete excercise from list"
+                    title='Are you sure?'
                     actions={actions}
                     modal={true}
                     open={this.props.open}
                 >
-                    Are you sure?
+                    You are trying to delete {excercise.title} from the list
                 </Dialog>
                 {this.getBody()}
             </Paper>
         )
-    }
-
-    getBody = () => {
-        if (!this.props.isOpen) return null
-        return (
-            <section>
-                {this.props.excercise.text}
-                <MediaLinkList excercise = {this.props.excercise} linksIds = {this.props.excercise.comments} />
-            </section>
-        )
-    }
-
-    handleDelete = id => ev => {
-        ev.preventDefault()
-        this.props.handleClose()
-        this.props.deleteExcercise(id)
     }
 }
 
