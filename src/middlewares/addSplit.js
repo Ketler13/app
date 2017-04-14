@@ -12,12 +12,6 @@ export default store => next => action => {
         }
       })
       .then(response => console.log(JSON.parse(response.request.response)))
-      axios({
-        method: 'get',
-        url: '/api/splits',
-        data: JSON.stringify(rest.payload)
-      })
-      .then(response => console.log(JSON.parse(response.request.response)))
     }
     next(action)
 }

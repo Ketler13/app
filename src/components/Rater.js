@@ -26,7 +26,7 @@ function Rater(props) {
 
 Rater.propTypes = {
     rate: PropTypes.number.isRequired,
-    splitId: PropTypes.number.isRequired,
+    splitId: PropTypes.string.isRequired,
     addRate: PropTypes.func.isRequired
 }
 

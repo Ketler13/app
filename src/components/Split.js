@@ -17,7 +17,7 @@ class Split extends Component {
                 )
             })
             return (
-                <tr key = {exc.id}>
+                <tr key = {exc.id || exc._id}>
                     <th>{exc.name}</th>
                     {sets}
                 </tr>
@@ -30,7 +30,7 @@ class Split extends Component {
                     <tbody>{excercises}</tbody>
                 </table>
                 <Rater
-                    splitId = {Number(this.props.splitId)}
+                    splitId = {this.props.splitId}
                     rate = {Number(this.props.mark)}
                     addRate = {this.addRate}
 

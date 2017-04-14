@@ -6,8 +6,6 @@ export const CHANGE_SELECTION = 'CHANGE_SELECTION'
 export const ADD_LINK = 'ADD_LINK'
 export const ADD_SPLIT = 'ADD_SPLIT'
 
-export const SHOW_DIARY = 'SHOW_DIARY'
-
 export const SELECT_EXCERCISES_FOR_NEW_SPLIT = 'SELECT_EXCERCISES_FOR_NEW_SPLIT'
 export const SELECT_DATE_FOR_NEW_SPLIT = 'SELECT_DATE_FOR_NEW_SPLIT'
 export const ADD_SET_IN_NEW_SPLIT = 'ADD_SET_IN_NEW_SPLIT'
@@ -21,3 +19,5 @@ export const ADD_RATE = 'ADD_RATE'
 
 export const ADD = '_ADD'
 export const REMOVE = '_REMOVE'
+
+export const LOAD_SPLITS = 'LOAD_SPLITS'
