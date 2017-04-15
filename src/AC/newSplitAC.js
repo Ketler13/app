@@ -78,6 +78,7 @@ export function addRate(id, rate) {
         payload: {
             id,
             rate
-        }
+        },
+        setRate: true
     }
 }

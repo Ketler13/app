@@ -3,7 +3,7 @@ import Split from './Split'
 import Paper from 'material-ui/Paper'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
-import { loadSplits } from '../AC'
+import { loadSplits, deleteSplit } from '../AC'
 import { addRate } from '../AC/newSplitAC'
 
 class Splits extends Component {
@@ -34,6 +34,7 @@ class Splits extends Component {
                       excercises = {split.excercises}
                       mark = {split.mark}
                       addRate = {this.props.addRate}
+                      deleteSplit = {this.props.deleteSplit}
                   />
               </Paper>
           )
@@ -46,4 +47,4 @@ export default connect((state) => {
     return {
         diary: mapToArray(state.diary)
     }
-}, {addRate, loadSplits})(Splits)
+}, {addRate, loadSplits, deleteSplit})(Splits)

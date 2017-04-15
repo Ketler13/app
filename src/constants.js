@@ -21,3 +21,4 @@ export const ADD = '_ADD'
 export const REMOVE = '_REMOVE'
 
 export const LOAD_SPLITS = 'LOAD_SPLITS'
+export const DELETE_SPLIT = 'DELETE_SPLIT'

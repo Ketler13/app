@@ -16,6 +16,6 @@ export function generateRandomId() {
 }
 
 export function formatDate(date) {
-    const formattedDate = new Date(Date.parse(date)).toISOString().split('T')[0]
+    const formattedDate = new Date(Date.parse(date)).toLocaleDateString()
     return formattedDate
 }

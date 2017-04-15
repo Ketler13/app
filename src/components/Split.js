@@ -1,13 +1,30 @@
 import React, {Component} from 'react'
 import Rater from './Rater'
 import toggleOpen from '../decorators/toggleOpen'
+import IconButton from 'material-ui/IconButton'
+import ContentClear from 'material-ui/svg-icons/content/clear'
 
 class Split extends Component {
     addRate = (id, rate) => ev => {
         this.props.addRate(id, rate)
     }
 
+    deleteSplit = id => ev => {
+      this.props.deleteSplit(id)
+    }
+
     getBody = () => {
+        const style = {
+          container: {
+            position: 'relative',
+          },
+          iconButton: {
+            display: 'block',
+            position: 'absolute',
+            top: '-25px',
+            right: '0px',
+          }
+        }
         const excercises = this.props.excercises.map(exc => {
             const sets = exc.sets.map((set, i) => {
                 return (
@@ -25,7 +42,13 @@ class Split extends Component {
         })
         if (!this.props.isOpen) return null
         return (
-            <div>
+            <div style = {style.container}>
+              <IconButton
+                  onTouchTap = {this.deleteSplit(this.props.splitId)}
+                  style = {style.iconButton}
+              >
+                  <ContentClear/>
+              </IconButton>
                 <table>
                     <tbody>{excercises}</tbody>
                 </table>
