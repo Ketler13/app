@@ -7,7 +7,8 @@ export function deleteExcercise(id) {
         type: DELETE_EXCERCISE,
         payload: {
             id
-        }
+        },
+        deleteExcercise: true
     }
 }
 

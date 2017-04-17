@@ -40,6 +40,7 @@ class ExcerciseList extends Component {
 
     render() {
       const {formIsOpened, title, text, error, titleIsChecked} = this.props
+      let excercises
       const style = {
         container: {
             display: 'flex',
@@ -56,40 +57,45 @@ class ExcerciseList extends Component {
         }
       }
 
-        const excercises = this.props.excercises.map(excercise => {
-            return (
-                 <li key = {excercise.id}  style = {style.item}>
-                    <Excercise
-                        excercise = {excercise}
-                        isOpen = {this.props.isOpen(excercise.id)}
-                        onClick = {this.props.toggleOpenItem(excercise.id)}
-                        deleteExcercise = {this.props.deleteExcercise}
-                    />
-                </li>
-            )
+      if (!this.props.excercises.length) {
+        excercises = <li style = {style.item}>No excercises yet</li>
+      } else {
+        excercises = this.props.excercises.map(excercise => {
+          return (
+            <li key = {excercise.id}  style = {style.item}>
+              <Excercise
+                excercise = {excercise}
+                isOpen = {this.props.isOpen(excercise.id)}
+                onClick = {this.props.toggleOpenItem(excercise.id)}
+                deleteExcercise = {this.props.deleteExcercise}
+              />
+            </li>
+          )
         })
-        return (
-            <div className = "excercises">
-                <Filter/>
-                <RaisedButton
-                  label="Add new"
-                  onTouchTap={this.toggleNewExcerciseForm}
-                  secondary={true}
-                  style={style.button}
-                />
-                <NewExcerciseForm
-                  isOpen = {formIsOpened}
-                  title = {title}
-                  text = {text}
-                  error = {error}
-                  setField = {this.setExcerciseField}
-                  closeForm = {this.toggleNewExcerciseForm}
-                  checkTitle = {this.checkExcerciseTitle}
-                  addExcercise = {this.addExcercise}
-                />
-                <ul style = {style.container}>{excercises}</ul>
-            </div>
-        )
+      }
+
+      return (
+          <div className = "excercises">
+              <Filter/>
+              <RaisedButton
+                label="Add new"
+                onTouchTap={this.toggleNewExcerciseForm}
+                secondary={true}
+                style={style.button}
+              />
+              <NewExcerciseForm
+                isOpen = {formIsOpened}
+                title = {title}
+                text = {text}
+                error = {error}
+                setField = {this.setExcerciseField}
+                closeForm = {this.toggleNewExcerciseForm}
+                checkTitle = {this.checkExcerciseTitle}
+                addExcercise = {this.addExcercise}
+              />
+              <ul style = {style.container}>{excercises}</ul>
+          </div>
+      )
     }
 }
 

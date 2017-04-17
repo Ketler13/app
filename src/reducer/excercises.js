@@ -1,4 +1,6 @@
-import { DELETE_EXCERCISE, ADD_LINK, LOAD_EXCERCISES, ERROR } from '../constants'
+import { DELETE_EXCERCISE, ADD_LINK, LOAD_EXCERCISES, ADD_EXCERCISE,
+         ERROR
+       } from '../constants'
 import { normalizedExcercises } from '../fixtures'
 import { arrayToMap } from '../helpers'
 import { Record, OrderedMap } from 'immutable'
@@ -19,10 +21,16 @@ export default (state = new OrderedMap({}), action) => {
         return state.merge(arrayToMap(excercises, ExcerciseModel))
 
       case LOAD_EXCERCISES + ERROR:
-        return excerciseState
+        return state
+
+      case ADD_EXCERCISE:
+        return state
 
       case DELETE_EXCERCISE:
         return state.delete(payload.id)
+
+      case DELETE_EXCERCISE + ERROR:
+        return state
 
       case ADD_LINK:
         return state.updateIn([payload.excerciseId, 'comments'], comments => comments.concat(randomId))
