@@ -5,7 +5,7 @@ import NewExcerciseForm from './NewExcerciseForm'
 import Filter from './Filters'
 import RaisedButton from 'material-ui/RaisedButton'
 import accordion from '../decorators/accordion'
-import { deleteExcercise } from '../AC'
+import { deleteExcercise, loadExcercises } from '../AC'
 import { setExcerciseField, toggleNewExcerciseForm, addExcercise, checkExcerciseTitle } from '../AC/newExcercise'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
@@ -34,23 +34,27 @@ class ExcerciseList extends Component {
       this.props.addExcercise(title, text)
     }
 
+    componentDidMount() {
+      this.props.loadExcercises()
+    }
+
     render() {
       const {formIsOpened, title, text, error, titleIsChecked} = this.props
-        const style = {
-            container: {
-                display: 'flex',
-                flexFlow: 'column nowrap',
-                justifyContent: 'flexStart',
-                alignItems: 'center',
-            },
-            item: {
-                margin: '10px 0',
-                width: '70%',
-            },
-            button: {
-              width: '100%',
-            }
+      const style = {
+        container: {
+            display: 'flex',
+            flexFlow: 'column nowrap',
+            justifyContent: 'flexStart',
+            alignItems: 'center',
+        },
+        item: {
+            margin: '10px 0',
+            width: '70%',
+        },
+        button: {
+          width: '100%',
         }
+      }
 
         const excercises = this.props.excercises.map(excercise => {
             return (
@@ -105,4 +109,7 @@ export default connect((state) => {
         excercises: filteredExcercises,
         formIsOpened, text, title, error
     }
-}, {deleteExcercise, setExcerciseField, toggleNewExcerciseForm, addExcercise, checkExcerciseTitle})(accordion(ExcerciseList))
+}, {
+      deleteExcercise, setExcerciseField, toggleNewExcerciseForm, addExcercise,
+      checkExcerciseTitle, loadExcercises
+    })(accordion(ExcerciseList))

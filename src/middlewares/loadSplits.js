@@ -12,4 +12,5 @@ export default store => next => action => {
     const splits = JSON.parse(response.request.response)
     next({...rest, splits})
   })
+  .catch(error => console.log(error))
 }

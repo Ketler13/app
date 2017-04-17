@@ -1,4 +1,6 @@
-import { DELETE_EXCERCISE, ADD_LINK, LOAD_SPLITS, DELETE_SPLIT } from '../constants'
+import { DELETE_EXCERCISE, ADD_LINK, LOAD_SPLITS, DELETE_SPLIT,
+         LOAD_EXCERCISES
+       } from '../constants'
 
 export function deleteExcercise(id) {
     return {
@@ -31,5 +33,12 @@ export function deleteSplit(id) {
       id
     },
     deleteSplit: true
+  }
+}
+
+export function loadExcercises() {
+  return {
+    type: LOAD_EXCERCISES,
+    loadExcercises: true
   }
 }
