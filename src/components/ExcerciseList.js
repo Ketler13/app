@@ -1,9 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { excercises } from '../fixtures'
 import Excercise from './Excercise'
+import NewExcerciseForm from './NewExcerciseForm'
 import Filter from './Filters'
+import RaisedButton from 'material-ui/RaisedButton'
 import accordion from '../decorators/accordion'
 import { deleteExcercise } from '../AC'
+import { setExcerciseField, toggleNewExcerciseForm, addExcercise, checkExcerciseTitle } from '../AC/newExcercise'
 import { connect } from 'react-redux'
 import { mapToArray } from '../helpers'
 
@@ -15,7 +18,24 @@ class ExcerciseList extends Component {
         deleteExcercise: PropTypes.func.isRequired
     }
 
+    toggleNewExcerciseForm = ev => {
+      this.props.toggleNewExcerciseForm();
+    }
+
+    setExcerciseField = field => ev => {
+      this.props.setExcerciseField(field, ev.target.value)
+    }
+
+    checkExcerciseTitle = ev => {
+      ev.target.value && this.props.checkExcerciseTitle(ev.target.value)
+    }
+
+    addExcercise = (title, text) => ev => {
+      this.props.addExcercise(title, text)
+    }
+
     render() {
+      const {formIsOpened, title, text, error} = this.props
         const style = {
             container: {
                 display: 'flex',
@@ -26,6 +46,9 @@ class ExcerciseList extends Component {
             item: {
                 margin: '10px 0',
                 width: '70%',
+            },
+            button: {
+              width: '100%',
             }
         }
 
@@ -44,6 +67,22 @@ class ExcerciseList extends Component {
         return (
             <div className = "excercises">
                 <Filter/>
+                <RaisedButton
+                  label="Add new"
+                  onTouchTap={this.toggleNewExcerciseForm}
+                  secondary={true}
+                  style={style.button}
+                />
+                <NewExcerciseForm
+                  isOpen = {formIsOpened}
+                  title = {title}
+                  text = {text}
+                  error = {error}
+                  setField = {this.setExcerciseField}
+                  closeForm = {this.toggleNewExcerciseForm}
+                  checkTitle = {this.checkExcerciseTitle}
+                  addExcercise = {this.addExcercise}
+                />
                 <ul style = {style.container}>{excercises}</ul>
             </div>
         )
@@ -52,6 +91,7 @@ class ExcerciseList extends Component {
 
 export default connect((state) => {
     const excercises = mapToArray(state.excercises)
+    const {formIsOpened, text, title, error} = state.newExcercise
     const { filters } = state
     const {selected} = filters
     const { from, to } = filters.dateRange
@@ -62,6 +102,7 @@ export default connect((state) => {
             (!from || !to || (published > from && published < to))
     })
     return {
-        excercises: filteredExcercises
+        excercises: filteredExcercises,
+        formIsOpened, text, title, error
     }
-}, {deleteExcercise})(accordion(ExcerciseList))
+}, {deleteExcercise, setExcerciseField, toggleNewExcerciseForm, addExcercise, checkExcerciseTitle})(accordion(ExcerciseList))

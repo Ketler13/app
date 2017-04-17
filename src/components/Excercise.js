@@ -26,7 +26,6 @@ class Excercise extends Component {
         return (
             <section>
                 {this.props.excercise.text}
-                <MediaLinkList excercise = {this.props.excercise} linksIds = {this.props.excercise.comments} />
             </section>
         )
     }

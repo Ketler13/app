@@ -21,7 +21,7 @@ class Split extends Component {
           iconButton: {
             display: 'block',
             position: 'absolute',
-            top: '-25px',
+            top: '-35px',
             right: '0px',
           }
         }

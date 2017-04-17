@@ -25,6 +25,7 @@ class Splits extends Component {
           margin: '10px',
           padding: '5px',
       }
+      if (!diary.length) return <div className = "splits">No splits yet</div>
       const splits = diary.map(split => {
           return (
               <Paper key = {split.id} style = {style} zDepth={5} className = "splitItem">
