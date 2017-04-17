@@ -31,7 +31,7 @@ const NewExcerciseForm = ({
         onChange={setField('title')}
         fullWidth = {true}
         hintText="Title"
-        errorText="This field is required"
+        errorText={error}
         onBlur = {checkTitle}
       />
       <br/>
@@ -41,7 +41,6 @@ const NewExcerciseForm = ({
         onChange={setField('text')}
         fullWidth = {true}
         hintText="Text"
-        errorText="This field is required"
       />
     </Dialog>
   )

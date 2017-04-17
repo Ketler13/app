@@ -10,7 +10,7 @@ const DefaultState = {
 }
 
 export default (state = DefaultState, action) => {
-  const { type, payload } = action
+  const { type, payload, error } = action
 
   switch (type) {
     case TOGGLE_NEW_EXCERCISE_FORM:
@@ -20,7 +20,16 @@ export default (state = DefaultState, action) => {
       }
 
     case CHECK_EXCERCISE_TITLE:
-      return state
+      return {
+        ...state,
+        error: null
+      }
+
+    case CHECK_EXCERCISE_TITLE + ERROR:
+      return {
+        ...state,
+        error
+      }
 
     case SET_EXCERCISE_TITLE:
       return {
