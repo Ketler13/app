@@ -5,13 +5,14 @@ import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
 const NewExcerciseForm = ({
-  text, title, error, isOpen, closeForm, setField, addExcercise, checkTitle
-                                                                        }) => {
+  text, title, error, isOpen, closeForm, setField,addExcercise,checkTitle }) => {
 
+  const dataIsCorrect = !error && !!text && !!title
   const actions = [
       <FlatButton
           label="Ok"
-          primary={true}
+          primary={dataIsCorrect}
+          disabled={!dataIsCorrect}
           keyboardFocused={true}
           onTouchTap={addExcercise(title, text)}
       />,

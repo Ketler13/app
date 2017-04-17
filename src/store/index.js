@@ -6,9 +6,11 @@ import loadSplits from '../middlewares/loadSplits'
 import setRate from '../middlewares/setRate'
 import deleteSplit from '../middlewares/deleteSplit'
 import checkExcerciseTitle from '../middlewares/checkExcerciseTitle'
+import addExcercise from '../middlewares/addExcercise'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const enhancer = composeEnhancers(applyMiddleware(loadSplits, addSplit, deleteSplit, setRate, randomId, checkExcerciseTitle))
+const enhancer = composeEnhancers(applyMiddleware(loadSplits, addSplit,
+  deleteSplit, setRate, randomId, checkExcerciseTitle, addExcercise))
 
 const store = createStore(reducer, {}, enhancer)
 window.store = store

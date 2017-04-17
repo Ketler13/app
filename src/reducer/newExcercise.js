@@ -45,6 +45,12 @@ export default (state = DefaultState, action) => {
 
     case ADD_EXCERCISE:
       return DefaultState
+
+    case ADD_EXCERCISE + ERROR:
+      return {
+        ...state,
+        error
+      }
   }
 
   return state

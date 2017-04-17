@@ -35,7 +35,7 @@ class ExcerciseList extends Component {
     }
 
     render() {
-      const {formIsOpened, title, text, error} = this.props
+      const {formIsOpened, title, text, error, titleIsChecked} = this.props
         const style = {
             container: {
                 display: 'flex',
