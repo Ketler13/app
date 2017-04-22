@@ -10,6 +10,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import Snackbar from 'material-ui/Snackbar'
 import { connect } from 'react-redux'
 import { mapToArray, formatDate } from '../helpers'
+import { loadExcercises } from '../AC'
 import { selectExcercisesForNewSplit, selectDateForNewSplit,
          addSetInNewSplit, addSplit, openNewSplitModal, closeNewSplitModal,
          deleteExcerciseFromSelect,deleteExcerciseFromNewSplit
@@ -30,6 +31,10 @@ class NewSplit extends Component {
         selectDateForNewSplit: PropTypes.func,
         addSplit: PropTypes.func,
         deleteExcerciseFromNewSplit: PropTypes.func
+    }
+
+    componentDidMount() {
+      this.props.loadExcercises()
     }
 
     openModal = modalName => () => {
@@ -154,5 +159,6 @@ export default connect((state) => {
     openNewSplitModal,
     closeNewSplitModal,
     deleteExcerciseFromSelect,
-    deleteExcerciseFromNewSplit
+    deleteExcerciseFromNewSplit,
+    loadExcercises
 })(NewSplit)
