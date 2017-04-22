@@ -1,11 +1,16 @@
 import React, { PropTypes } from 'react'
+import Welcome from '../Welcome'
 import AppBar from 'material-ui/AppBar'
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui/svg-icons/navigation/menu';
+import IconMenu from 'material-ui/IconMenu'
+import MenuItem from 'material-ui/MenuItem'
+import IconButton from 'material-ui/IconButton'
+import MenuIcon from 'material-ui/svg-icons/navigation/menu'
+import FlatButton from 'material-ui/FlatButton'
+import Dialog from 'material-ui/Dialog'
+import { toggleLoginForm } from '../../AC'
+import {connect} from 'react-redux'
 
-export default function Menu(props) {
+function Menu(props) {
     const items = props.children.map((child, i) => {
         return (
             <MenuItem key = {i}>
@@ -13,6 +18,14 @@ export default function Menu(props) {
             </MenuItem>
         )
     })
+    const actions = [
+        <FlatButton
+            label="Ok"
+            primary={true}
+            keyboardFocused={true}
+            onTouchTap={props.toggleLoginForm}
+        />,
+    ]
     return (
         <AppBar
             iconElementLeft = {
@@ -24,9 +37,29 @@ export default function Menu(props) {
                     {items}
                 </IconMenu>
             }
+            iconElementRight = {
+                <FlatButton
+                  label="Log In/Sign up"
+                  onTouchTap = {props.toggleLoginForm}
+                />
+            }
             title="gymlog"
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
         >
+          <Dialog
+              actions={actions}
+              modal={false}
+              open={props.formIsOpen}
+              onRequestClose={props.toggleLoginForm}
+              autoScrollBodyContent={true}
+          >
+            <Welcome/>
+          </Dialog>
         </AppBar>
         )
 }
+
+export default connect(store => {
+  return {
+    formIsOpen: store.login.formIsOpen
+  }
+}, {toggleLoginForm})(Menu)

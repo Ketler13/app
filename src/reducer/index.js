@@ -5,6 +5,7 @@ import links from './links'
 import diary from './diary'
 import newSplitState from './newSplitState'
 import newExcercise from './newExcercise'
+import login from './login'
 
 export default combineReducers({
     excercises,
@@ -12,5 +13,6 @@ export default combineReducers({
     filters,
     diary,
     newSplitState,
-    newExcercise
+    newExcercise,
+    login
 })

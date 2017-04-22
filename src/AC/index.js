@@ -1,5 +1,5 @@
 import { DELETE_EXCERCISE, ADD_LINK, LOAD_SPLITS, DELETE_SPLIT,
-         LOAD_EXCERCISES
+         LOAD_EXCERCISES, TOGGLE_LOGIN_FORM, SET_LOGIN_FIELD
        } from '../constants'
 
 export function deleteExcercise(id) {
@@ -41,5 +41,20 @@ export function loadExcercises() {
   return {
     type: LOAD_EXCERCISES,
     loadExcercises: true
+  }
+}
+
+export function toggleLoginForm() {
+  return {
+    type: TOGGLE_LOGIN_FORM
+  }
+}
+
+export function setLogInField(field, value) {
+  return {
+    type: SET_LOGIN_FIELD,
+    payload: {
+      field, value
+    }
   }
 }
