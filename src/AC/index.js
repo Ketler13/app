@@ -1,5 +1,6 @@
 import { DELETE_EXCERCISE, ADD_LINK, LOAD_SPLITS, DELETE_SPLIT,
-         LOAD_EXCERCISES, TOGGLE_LOGIN_FORM, SET_LOGIN_FIELD
+         LOAD_EXCERCISES, TOGGLE_LOGIN_FORM, SET_LOGIN_FIELD,
+         CHECK_NAME_UNIQUE, CHECK_EMAIL_UNIQUE, ADD_USER
        } from '../constants'
 
 export function deleteExcercise(id) {
@@ -56,5 +57,33 @@ export function setLogInField(field, value) {
     payload: {
       field, value
     }
+  }
+}
+
+export function checkNameUnique(name) {
+  return {
+    type: CHECK_NAME_UNIQUE,
+    payload: {
+      name
+    },
+    checkName: true
+  }
+}
+
+export function checkEmailUnique(email) {
+  return {
+    type: CHECK_EMAIL_UNIQUE,
+    payload: {
+      email
+    },
+    checkEmail: true
+  }
+}
+
+export function addUser(user) {
+  return {
+    type: ADD_USER,
+    payload: user,
+    addUser: true
   }
 }

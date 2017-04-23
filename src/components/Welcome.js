@@ -1,11 +1,14 @@
 import React, {Component, PropTypes} from 'react'
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm'
-import {setLogInField} from '../AC'
+import {setLogInField, checkNameUnique, checkEmailUnique, addUser} from '../AC'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import {connect} from 'react-redux'
 
-const Welcome = ({email, password, newName, newEmail, newPassword, setLogInField}) => {
+const Welcome = ({email, password, newName, newEmail, newPassword,
+                  setLogInField, nameUniqueError, emailUniqueError,
+                  checkNameUnique, checkEmailUnique, userWasRegistered,
+                  registerError, addUser                               }) => {
   const style = {
     container: {
       width: '100vw',
@@ -36,12 +39,19 @@ const Welcome = ({email, password, newName, newEmail, newPassword, setLogInField
           setField = {setField}
         />
       </Tab>
-      <Tab label="Register" >
+      <Tab label="Sign Up" >
         <RegisterForm
           email = {newEmail}
           name = {newName}
           password = {newPassword}
           setField = {setField}
+          nameUniqueError = {nameUniqueError}
+          emailUniqueError = {emailUniqueError}
+          checkNameUnique = {checkNameUnique}
+          checkEmailUnique = {checkEmailUnique}
+          userWasRegistered = {userWasRegistered}
+          registerError = {registerError}
+          addUser = {addUser}
         />
       </Tab>
     </Tabs>
@@ -49,8 +59,10 @@ const Welcome = ({email, password, newName, newEmail, newPassword, setLogInField
 }
 
 export default connect(store => {
-  const { email, password, newName, newEmail, newPassword } = store.login
+  const { email, password, newName, newEmail, newPassword, nameUniqueError,
+          emailUniqueError, userWasRegistered, registerError } = store.login
   return {
-    email, password, newName, newEmail, newPassword
+    email, password, newName, newEmail, newPassword, nameUniqueError,
+    emailUniqueError, userWasRegistered, registerError
   }
-}, {setLogInField})(Welcome)
+}, {setLogInField, checkNameUnique, checkEmailUnique, addUser})(Welcome)
