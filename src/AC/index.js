@@ -1,6 +1,6 @@
 import { DELETE_EXCERCISE, ADD_LINK, LOAD_SPLITS, DELETE_SPLIT,
          LOAD_EXCERCISES, TOGGLE_LOGIN_FORM, SET_LOGIN_FIELD,
-         CHECK_NAME_UNIQUE, CHECK_EMAIL_UNIQUE, ADD_USER
+         CHECK_NAME_UNIQUE, CHECK_EMAIL_UNIQUE, ADD_USER, LOG_IN
        } from '../constants'
 
 export function deleteExcercise(id) {
@@ -85,5 +85,13 @@ export function addUser(user) {
     type: ADD_USER,
     payload: user,
     addUser: true
+  }
+}
+
+export function logIn(user) {
+  return {
+    type: LOG_IN,
+    payload: user,
+    logIn: true
   }
 }

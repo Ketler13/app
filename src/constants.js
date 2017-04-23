@@ -38,3 +38,4 @@ export const CHECK_NAME_UNIQUE = 'CHECK_NAME_UNIQUE'
 export const CHECK_EMAIL_UNIQUE = 'CHECK_EMAIL_UNIQUE'
 
 export const ADD_USER = 'ADD_USER'
+export const LOG_IN = 'LOG_IN'

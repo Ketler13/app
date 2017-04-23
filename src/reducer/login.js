@@ -1,5 +1,5 @@
 import { TOGGLE_LOGIN_FORM, SET_LOGIN_FIELD, CHECK_NAME_UNIQUE,
-         CHECK_EMAIL_UNIQUE, ADD_USER
+         CHECK_EMAIL_UNIQUE, ADD_USER, LOG_IN
        } from '../constants'
 
 const defaultState = {
@@ -12,11 +12,14 @@ const defaultState = {
   nameUniqueError: '',
   emailUniqueError: '',
   userWasRegistered: false,
-  registerError: ''
+  registerError: '',
+  userWasLoggedIn: false,
+  logInError: '',
+  user: null
 }
 
 export default (state = defaultState, action) => {
-  const { type, payload, error } = action
+  const { type, payload, error, user } = action
 
   switch (type) {
     case TOGGLE_LOGIN_FORM:
@@ -58,6 +61,11 @@ export default (state = defaultState, action) => {
     case ADD_USER:
       return {
         ...state,
+        newEmail: '',
+        newName: '',
+        newPassword: '',
+        nameUniqueError: '',
+        emailUniqueError: '',
         userWasRegistered: true,
         registerError: ''
       }
@@ -67,6 +75,20 @@ export default (state = defaultState, action) => {
         ...state,
         userWasRegistered: false,
         registerError: error
+      }
+
+    case LOG_IN:
+      return {
+        ...defaultState,
+        userWasLoggedIn: true,
+        user
+      }
+
+    case LOG_IN + '_ERROR':
+      return {
+        ...state,
+        userWasLoggedIn: false,
+        logInError: error
       }
   }
 

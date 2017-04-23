@@ -3,7 +3,12 @@ import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
 
-export default ({email, password, setField}) => {
+export default ({ email, password, setField, userWasLoggedIn, logInError,
+                  logIn                                                  }) => {
+  const dataIsCorrect = email && password
+  const enter = ev => {
+    dataIsCorrect && logIn({email, password})
+  }
   return (
     <div>
       <TextField
@@ -20,7 +25,13 @@ export default ({email, password, setField}) => {
         hintText="password"
       />
       <br/>
-      <FlatButton secondary = {true} label="Log In"/>
+      <FlatButton
+        secondary = {!!dataIsCorrect}
+        disabled = {!dataIsCorrect}
+        label="Log In"
+        onTouchTap = {enter}
+      />
+      {(logInError && !userWasLoggedIn) ? <p>logInError</p> : null}
     </div>
   )
 }
