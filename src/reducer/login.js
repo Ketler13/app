@@ -1,5 +1,5 @@
-import { TOGGLE_LOGIN_FORM, SET_LOGIN_FIELD, CHECK_NAME_UNIQUE,
-         CHECK_EMAIL_UNIQUE, ADD_USER, LOG_IN
+import { TOGGLE_LOGIN_FORM, OPEN_LOGIN_FORM, CLOSE_LOGIN_FORM, SET_LOGIN_FIELD,
+         CHECK_NAME_UNIQUE, CHECK_EMAIL_UNIQUE, ADD_USER, LOG_IN, LOG_OUT
        } from '../constants'
 
 const defaultState = {
@@ -15,17 +15,30 @@ const defaultState = {
   registerError: '',
   userWasLoggedIn: false,
   logInError: '',
-  user: null
+  user: null,
+  token: null
 }
 
 export default (state = defaultState, action) => {
-  const { type, payload, error, user } = action
+  const { type, payload, error, user, token } = action
 
   switch (type) {
     case TOGGLE_LOGIN_FORM:
       return {
         ...state,
         formIsOpen: !state.formIsOpen
+      }
+
+    case OPEN_LOGIN_FORM:
+      return {
+        ...state,
+        formIsOpen: true
+      }
+
+    case CLOSE_LOGIN_FORM:
+      return {
+        ...state,
+        formIsOpen: false
       }
 
     case SET_LOGIN_FIELD:
@@ -81,7 +94,8 @@ export default (state = defaultState, action) => {
       return {
         ...defaultState,
         userWasLoggedIn: true,
-        user
+        user,
+        token
       }
 
     case LOG_IN + '_ERROR':
@@ -89,6 +103,11 @@ export default (state = defaultState, action) => {
         ...state,
         userWasLoggedIn: false,
         logInError: error
+      }
+
+    case LOG_OUT:
+      return {
+        ...defaultState
       }
   }
 

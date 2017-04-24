@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run dev\" \"npm run api\"",
-    "api": "node simple_api/server.js",
+    "start": "npm run dev",
     "dev": "webpack-dev-server --hot --inline",
-    "build": "webpack"
+    "build": "set NODE_ENV='production' && webpack -p"
   },
   "repository": {
     "type": "git",

@@ -33,9 +33,12 @@ export const ERROR = '_ERROR'
 export const LOAD_EXCERCISES = 'LOAD_EXCERCISES'
 
 export const TOGGLE_LOGIN_FORM = 'TOGGLE_LOGIN_FORM'
+export const OPEN_LOGIN_FORM = 'OPEN_LOGIN_FORM'
+export const CLOSE_LOGIN_FORM = 'CLOSE_LOGIN_FORM'
 export const SET_LOGIN_FIELD = 'SET_LOGIN_FIELD'
 export const CHECK_NAME_UNIQUE = 'CHECK_NAME_UNIQUE'
 export const CHECK_EMAIL_UNIQUE = 'CHECK_EMAIL_UNIQUE'
 
 export const ADD_USER = 'ADD_USER'
 export const LOG_IN = 'LOG_IN'
+export const LOG_OUT = 'LOG_OUT'

@@ -19,11 +19,11 @@ class ExcerciseList extends Component {
     }
 
     toggleNewExcerciseForm = ev => {
-      this.props.toggleNewExcerciseForm();
+      this.props.userWasLoggedIn && this.props.toggleNewExcerciseForm();
     }
 
     setExcerciseField = field => ev => {
-      this.props.setExcerciseField(field, ev.target.value)
+      this.props.userWasLoggedIn && this.props.setExcerciseField(field, ev.target.value)
     }
 
     checkExcerciseTitle = ev => {
@@ -31,76 +31,92 @@ class ExcerciseList extends Component {
     }
 
     addExcercise = (title, text) => ev => {
-      this.props.addExcercise(title, text)
+      this.props.userWasLoggedIn && this.props.addExcercise(title, text)
+    }
+
+    componentWillReceiveProps(nextProps) {
+      !this.props.userWasLoggedIn && nextProps.userWasLoggedIn && nextProps.loadExcercises()
     }
 
     componentDidMount() {
-      this.props.loadExcercises()
+      this.props.userWasLoggedIn && this.props.loadExcercises()
     }
 
     render() {
-      const {formIsOpened, title, text, error, titleIsChecked} = this.props
-      let excercises
-      const style = {
-        container: {
-            display: 'flex',
-            flexFlow: 'column nowrap',
-            justifyContent: 'flexStart',
-            alignItems: 'center',
-        },
-        item: {
-            margin: '10px 0',
-            width: '70%',
-        },
-        button: {
-          width: '100%',
+      if (this.props.userWasLoggedIn) {
+        const {formIsOpened, title, text, error, titleIsChecked} = this.props
+        let excercises
+        const style = {
+          container: {
+              display: 'flex',
+              flexFlow: 'column nowrap',
+              justifyContent: 'flexStart',
+              alignItems: 'center',
+          },
+          item: {
+              margin: '10px 0',
+              width: '70%',
+          },
+          button: {
+            width: '100%',
+          }
         }
-      }
 
-      if (!this.props.excercises.length) {
-        excercises = <li style = {style.item}>No excercises yet</li>
+        if (!this.props.excercises.length) {
+          excercises = <li style = {style.item}>We can not load your excercises,
+            maybe you need to add few.
+          </li>
+        } else {
+          excercises = this.props.excercises.map(excercise => {
+            return (
+              <li key = {excercise.id}  style = {style.item}>
+                <Excercise
+                  excercise = {excercise}
+                  isOpen = {this.props.isOpen(excercise.id)}
+                  onClick = {this.props.toggleOpenItem(excercise.id)}
+                  deleteExcercise = {this.props.deleteExcercise}
+                />
+              </li>
+            )
+          })
+        }
+
+        return (
+            <div className = "excercises">
+                <Filter/>
+                <RaisedButton
+                  label="Add new"
+                  onTouchTap={this.toggleNewExcerciseForm}
+                  secondary={true}
+                  style={style.button}
+                />
+                <NewExcerciseForm
+                  isOpen = {formIsOpened}
+                  title = {title}
+                  text = {text}
+                  error = {error}
+                  setField = {this.setExcerciseField}
+                  closeForm = {this.toggleNewExcerciseForm}
+                  checkTitle = {this.checkExcerciseTitle}
+                  addExcercise = {this.addExcercise}
+                />
+                <ul style = {style.container}>{excercises}</ul>
+            </div>
+        )
       } else {
-        excercises = this.props.excercises.map(excercise => {
-          return (
-            <li key = {excercise.id}  style = {style.item}>
-              <Excercise
-                excercise = {excercise}
-                isOpen = {this.props.isOpen(excercise.id)}
-                onClick = {this.props.toggleOpenItem(excercise.id)}
-                deleteExcercise = {this.props.deleteExcercise}
-              />
-            </li>
-          )
-        })
+        return (
+          <div className = "excercises">
+            <p>Please, log in or sign up</p>
+          </div>
+        )
       }
 
-      return (
-          <div className = "excercises">
-              <Filter/>
-              <RaisedButton
-                label="Add new"
-                onTouchTap={this.toggleNewExcerciseForm}
-                secondary={true}
-                style={style.button}
-              />
-              <NewExcerciseForm
-                isOpen = {formIsOpened}
-                title = {title}
-                text = {text}
-                error = {error}
-                setField = {this.setExcerciseField}
-                closeForm = {this.toggleNewExcerciseForm}
-                checkTitle = {this.checkExcerciseTitle}
-                addExcercise = {this.addExcercise}
-              />
-              <ul style = {style.container}>{excercises}</ul>
-          </div>
-      )
     }
 }
 
 export default connect((state) => {
     const excercises = mapToArray(state.excercises)
+    const {userWasLoggedIn} = state.login
     const {formIsOpened, text, title, error} = state.newExcercise
     const { filters } = state
     const {selected} = filters
@@ -113,7 +129,7 @@ export default connect((state) => {
     })
     return {
         excercises: filteredExcercises,
-        formIsOpened, text, title, error
+        formIsOpened, text, title, error, userWasLoggedIn
     }
 }, {
       deleteExcercise, setExcerciseField, toggleNewExcerciseForm, addExcercise,

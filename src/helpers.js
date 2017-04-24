@@ -19,3 +19,7 @@ export function formatDate(date) {
     const formattedDate = new Date(Date.parse(date)).toLocaleDateString()
     return formattedDate
 }
+
+export function getToken(store) {
+  return store.getState().login.token
+}

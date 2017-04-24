@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import Welcome from '../Welcome'
+import LogOut from '../LogOut'
 import AppBar from 'material-ui/AppBar'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
@@ -7,7 +8,7 @@ import IconButton from 'material-ui/IconButton'
 import MenuIcon from 'material-ui/svg-icons/navigation/menu'
 import FlatButton from 'material-ui/FlatButton'
 import Dialog from 'material-ui/Dialog'
-import { toggleLoginForm } from '../../AC'
+import { toggleLoginForm, openLoginForm, closeLoginForm, logOut } from '../../AC'
 import {connect} from 'react-redux'
 
 function Menu(props) {
@@ -23,7 +24,7 @@ function Menu(props) {
             label="Ok"
             primary={true}
             keyboardFocused={true}
-            onTouchTap={props.toggleLoginForm}
+            onTouchTap={props.closeLoginForm}
         />,
     ]
     return (
@@ -38,9 +39,11 @@ function Menu(props) {
                 </IconMenu>
             }
             iconElementRight = {
+                props.userWasLoggedIn ?
+                <LogOut logOut = {props.logOut}/> :
                 <FlatButton
                   label="Log In/Sign up"
-                  onTouchTap = {props.toggleLoginForm}
+                  onTouchTap = {props.openLoginForm}
                 />
             }
             title="gymlog"
@@ -49,7 +52,7 @@ function Menu(props) {
               actions={actions}
               modal={false}
               open={props.formIsOpen}
-              onRequestClose={props.toggleLoginForm}
+              onRequestClose={props.closeLoginForm}
               autoScrollBodyContent={true}
           >
             <Welcome/>
@@ -60,6 +63,7 @@ function Menu(props) {
 
 export default connect(store => {
   return {
-    formIsOpen: store.login.formIsOpen
+    formIsOpen: store.login.formIsOpen,
+    userWasLoggedIn: store.login.userWasLoggedIn
   }
-}, {toggleLoginForm})(Menu)
+}, {toggleLoginForm, openLoginForm, closeLoginForm, logOut})(Menu)

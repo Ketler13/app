@@ -12,11 +12,14 @@ import deleteExcercise from '../middlewares/deleteExcercise'
 import checkNameUnique from '../middlewares/checkNameUnique'
 import checkEmailUnique from '../middlewares/checkEmailUnique'
 import addUser from '../middlewares/addUser'
+import logIn from '../middlewares/logIn'
+import logOut from '../middlewares/logOut'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const enhancer = composeEnhancers(applyMiddleware(loadSplits, addSplit,
   deleteSplit, setRate, randomId, checkExcerciseTitle, addExcercise,
-  loadExcercises, deleteExcercise, checkNameUnique, checkEmailUnique, addUser))
+  loadExcercises, deleteExcercise, checkNameUnique, checkEmailUnique, addUser,
+  logIn, logOut))
 
 const store = createStore(reducer, {}, enhancer)
 window.store = store

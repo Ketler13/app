@@ -1,6 +1,7 @@
 import { DELETE_EXCERCISE, ADD_LINK, LOAD_SPLITS, DELETE_SPLIT,
-         LOAD_EXCERCISES, TOGGLE_LOGIN_FORM, SET_LOGIN_FIELD,
-         CHECK_NAME_UNIQUE, CHECK_EMAIL_UNIQUE, ADD_USER, LOG_IN
+         LOAD_EXCERCISES, TOGGLE_LOGIN_FORM, OPEN_LOGIN_FORM,
+         CLOSE_LOGIN_FORM, SET_LOGIN_FIELD, CHECK_NAME_UNIQUE,
+         CHECK_EMAIL_UNIQUE, ADD_USER, LOG_IN, LOG_OUT
        } from '../constants'
 
 export function deleteExcercise(id) {
@@ -51,6 +52,18 @@ export function toggleLoginForm() {
   }
 }
 
+export function openLoginForm() {
+  return {
+    type: OPEN_LOGIN_FORM
+  }
+}
+
+export function closeLoginForm() {
+  return {
+    type: CLOSE_LOGIN_FORM
+  }
+}
+
 export function setLogInField(field, value) {
   return {
     type: SET_LOGIN_FIELD,
@@ -93,5 +106,12 @@ export function logIn(user) {
     type: LOG_IN,
     payload: user,
     logIn: true
+  }
+}
+
+export function logOut() {
+  return {
+    type: LOG_OUT,
+    logOut: true
   }
 }

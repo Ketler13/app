@@ -31,7 +31,7 @@ export default ({ email, password, setField, userWasLoggedIn, logInError,
         label="Log In"
         onTouchTap = {enter}
       />
-      {(logInError && !userWasLoggedIn) ? <p>logInError</p> : null}
+      {(logInError && !userWasLoggedIn) ? <p>{logInError}</p> : null}
     </div>
   )
 }
