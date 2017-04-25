@@ -40,12 +40,13 @@ export function deleteExcerciseFromNewSplit(excercise) {
     }
 }
 
-export function addSplit(date, excercises) {
+export function addSplit(date, excercises, user) {
     return {
         type: ADD_SPLIT,
         payload: {
             date,
-            excercises
+            excercises,
+            user
         },
         generateId: true
     }

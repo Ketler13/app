@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {getToken} from '../helpers'
 
 export default store => next => action => {
   const {addExcercise, ...rest} = action
@@ -8,7 +9,8 @@ export default store => next => action => {
     url: '/api/addExcercise',
     data: JSON.stringify(rest.payload),
     headers: {
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      token: getToken(store)
     }
   })
   .then(response => {

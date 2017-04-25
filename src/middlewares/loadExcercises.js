@@ -3,13 +3,12 @@ import {getToken} from '../helpers'
 
 export default store => next => action => {
   const {loadExcercises, ...rest} = action
-  const token = getToken(store)
   if (!loadExcercises) return next(action)
   axios({
     method: 'get',
     url: '/api/excercises',
     headers: {
-      token: token
+      token: getToken(store)
     }
   })
   .then(response => {

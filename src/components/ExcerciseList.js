@@ -3,6 +3,7 @@ import { excercises } from '../fixtures'
 import Excercise from './Excercise'
 import NewExcerciseForm from './NewExcerciseForm'
 import Filter from './Filters'
+import UnloggedPage from './UnloggedPage'
 import RaisedButton from 'material-ui/RaisedButton'
 import accordion from '../decorators/accordion'
 import { deleteExcercise, loadExcercises } from '../AC'
@@ -104,11 +105,7 @@ class ExcerciseList extends Component {
             </div>
         )
       } else {
-        return (
-          <div className = "excercises">
-            <p>Please, log in or sign up</p>
-          </div>
-        )
+        return <UnloggedPage />
       }
 
     }

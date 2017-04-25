@@ -1,11 +1,15 @@
 import axios from 'axios'
+import {getToken} from '../helpers'
 
 export default store => next => action => {
   const {deleteExcercise, ...rest} = action
   if (!deleteExcercise) return next(action)
   axios({
     method: 'delete',
-    url: `/api/excercises/${rest.payload.id}`
+    url: `/api/excercises/${rest.payload.id}`,
+    headers: {
+      token: getToken(store)
+    }
   })
   .then(response => {
     if (response.data.success) {

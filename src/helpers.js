@@ -23,3 +23,7 @@ export function formatDate(date) {
 export function getToken(store) {
   return store.getState().login.token
 }
+
+export function getUserId(store) {
+  return store.getState().login.user.id
+}

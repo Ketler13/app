@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 import Welcome from '../Welcome'
-import LogOut from '../LogOut'
 import AppBar from 'material-ui/AppBar'
 import IconMenu from 'material-ui/IconMenu'
 import MenuItem from 'material-ui/MenuItem'
@@ -30,23 +29,26 @@ function Menu(props) {
     return (
         <AppBar
             iconElementLeft = {
-                <IconMenu
-                  iconButtonElement={<IconButton><MenuIcon /></IconButton>}
-                  anchorOrigin={{horizontal: 'left', vertical: 'top'}}
-                  targetOrigin={{horizontal: 'left', vertical: 'top'}}
-                >
-                    {items}
-                </IconMenu>
+              <IconMenu
+                iconButtonElement={<IconButton><MenuIcon /></IconButton>}
+                anchorOrigin={{horizontal: 'left', vertical: 'top'}}
+                targetOrigin={{horizontal: 'left', vertical: 'top'}}
+              >
+                  {items}
+              </IconMenu>
             }
             iconElementRight = {
                 props.userWasLoggedIn ?
-                <LogOut logOut = {props.logOut}/> :
+                <FlatButton
+                  label="Log Out"
+                  onTouchTap = {props.logOut}
+                /> :
                 <FlatButton
                   label="Log In/Sign up"
                   onTouchTap = {props.openLoginForm}
                 />
             }
-            title="gymlog"
+            title= {props.user ? "glog: " + props.user.name : "glog"}
         >
           <Dialog
               actions={actions}
@@ -64,6 +66,7 @@ function Menu(props) {
 export default connect(store => {
   return {
     formIsOpen: store.login.formIsOpen,
-    userWasLoggedIn: store.login.userWasLoggedIn
+    userWasLoggedIn: store.login.userWasLoggedIn,
+    user: store.login.user
   }
 }, {toggleLoginForm, openLoginForm, closeLoginForm, logOut})(Menu)

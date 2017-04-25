@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {getToken} from '../helpers'
 
 export default store => next => action => {
   const {deleteSplit, ...rest} = action
@@ -6,6 +7,9 @@ export default store => next => action => {
   axios({
     method: 'delete',
     url: `/api/splits/${rest.payload.id}`,
+    headers: {
+      token: getToken(store)
+    },
     data: {
       rate: rest.payload.rate
     }

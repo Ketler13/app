@@ -22,9 +22,12 @@ export function addLink(excerciseId, link) {
     }
 }
 
-export function loadSplits() {
+export function loadSplits(user) {
   return {
     type: LOAD_SPLITS,
+    payload: {
+      user
+    },
     loadSplits: true
   }
 }

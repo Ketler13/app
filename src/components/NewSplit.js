@@ -4,6 +4,7 @@ import NewSplitDetails from './NewSplitDetails'
 import NewSplitTooltip from './NewSplitTooltip'
 import DatePickerForm from './DatePickerForm'
 import CustomSelect from './CustomSelect'
+import UnloggedPage from './UnloggedPage'
 import Dialog from 'material-ui/Dialog'
 import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
@@ -33,8 +34,12 @@ class NewSplit extends Component {
         deleteExcerciseFromNewSplit: PropTypes.func
     }
 
+    componentWillReceiveProps(nextProps) {
+      !this.props.userWasLoggedIn && nextProps.userWasLoggedIn && nextProps.loadExcercises()
+    }
+
     componentDidMount() {
-      this.props.loadExcercises()
+      this.props.userWasLoggedIn && this.props.loadExcercises()
     }
 
     openModal = modalName => () => {
@@ -63,13 +68,14 @@ class NewSplit extends Component {
 
     onSubmit = ev => {
         ev.preventDefault()
-        const { date, addSplit, newSplitExcercises } = this.props
+        const { date, addSplit, newSplitExcercises, userId } = this.props
         const newSplit = mapToArray(newSplitExcercises)
         const formattedDate = formatDate(date)
-        addSplit(formattedDate, newSplit)
+        addSplit(formattedDate, newSplit, userId)
     }
 
     render() {
+      if (this.props.userWasLoggedIn) {
         const actions = [
             <FlatButton
                 label="Ok"
@@ -78,7 +84,8 @@ class NewSplit extends Component {
                 onTouchTap={this.closeModal('EXCERCISE_SELECT')}
             />,
         ]
-        const { excercises, date, selected, newSplitExcercises, addSetInNewSplit, deleteExcerciseFromSelect } = this.props
+        const { excercises, date, selected, newSplitExcercises,
+                addSetInNewSplit, deleteExcerciseFromSelect } = this.props
         const options = excercises.map(exc => ({
             label: exc.title,
             value: exc.id
@@ -141,15 +148,20 @@ class NewSplit extends Component {
                 />
             </div>
         )
+      } else {
+        return <UnloggedPage />
+      }
     }
 }
 
 export default connect((state) => {
     const { date, selected, newSplitExcercises, excerciseSelectIsOpen, snackBarIsOpen } = state.newSplitState
     const excercises = mapToArray(state.excercises)
+    const {userWasLoggedIn} = state.login
+    const userId = state.login.user ? state.login.user.id : null 
     return {
         excercises, date, selected, newSplitExcercises, excerciseSelectIsOpen,
-        snackBarIsOpen
+        snackBarIsOpen, userWasLoggedIn, userId
     }
 }, {
     selectExcercisesForNewSplit,
