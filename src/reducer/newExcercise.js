@@ -1,5 +1,6 @@
 import { CHECK_EXCERCISE_TITLE, SET_EXCERCISE_TEXT, SET_EXCERCISE_TITLE,
-         TOGGLE_NEW_EXCERCISE_FORM, ERROR, ADD_EXCERCISE } from '../constants'
+         TOGGLE_NEW_EXCERCISE_FORM, ERROR, ADD_EXCERCISE, LOG_OUT
+       } from '../constants'
 import {} from '../helpers'
 
 const DefaultState = {
@@ -51,6 +52,9 @@ export default (state = DefaultState, action) => {
         ...state,
         error
       }
+
+    case LOG_OUT:
+      return DefaultState
   }
 
   return state

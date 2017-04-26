@@ -1,5 +1,5 @@
 import { diary } from '../diary'
-import { LOAD_SPLITS, ADD_SPLIT, ADD_RATE, DELETE_SPLIT } from '../constants'
+import { LOAD_SPLITS, ADD_SPLIT, ADD_RATE, DELETE_SPLIT, LOG_OUT } from '../constants'
 import { arrayToMap } from '../helpers'
 import { Record, OrderedMap } from 'immutable'
 
@@ -29,8 +29,10 @@ export default (state = new OrderedMap({}), action) => {
       return state.delete(payload.id)
 
     case DELETE_SPLIT + '_ERROR':
-      console.log('error')
       return state
+
+    case LOG_OUT:
+      return new OrderedMap({})
   }
 
   return state

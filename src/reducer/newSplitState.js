@@ -1,7 +1,9 @@
 import { SELECT_EXCERCISES_FOR_NEW_SPLIT, SELECT_DATE_FOR_NEW_SPLIT,
          ADD_SET_IN_NEW_SPLIT, DELETE_EXCERCISE_FROM_NEW_SPLIT, ADD_SPLIT,
          ADD, REMOVE, OPEN_EXCERCISE_SELECT, CLOSE_EXCERCISE_SELECT,
-         OPEN_DATE_PICKER, CLOSE_DATE_PICKER, DELETE_EXCERCISE_FROM_SELECT } from '../constants'
+         OPEN_DATE_PICKER, CLOSE_DATE_PICKER, DELETE_EXCERCISE_FROM_SELECT,
+         LOG_OUT
+       } from '../constants'
 import {} from '../helpers'
 import { Record, OrderedMap } from 'immutable'
 
@@ -61,6 +63,9 @@ export default (state = new StateModel({}), action) => {
 
         case CLOSE_EXCERCISE_SELECT:
             return state.set('excerciseSelectIsOpen', false)
+
+        case LOG_OUT:
+          return new StateModel({})
 
     }
 

@@ -1,5 +1,5 @@
 import { DELETE_EXCERCISE, ADD_LINK, LOAD_EXCERCISES, ADD_EXCERCISE,
-         ERROR
+         ERROR, LOG_OUT
        } from '../constants'
 import { normalizedExcercises } from '../fixtures'
 import { arrayToMap } from '../helpers'
@@ -34,6 +34,9 @@ export default (state = new OrderedMap({}), action) => {
 
       case ADD_LINK:
         return state.updateIn([payload.excerciseId, 'comments'], comments => comments.concat(randomId))
+
+      case LOG_OUT:
+        return new OrderedMap({})
     }
 
     return state

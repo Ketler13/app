@@ -1,4 +1,4 @@
-import { CHANGE_DATE_RANGE, CHANGE_SELECTION } from '../constants'
+import { CHANGE_DATE_RANGE, CHANGE_SELECTION, LOG_OUT } from '../constants'
 
 const defaultFilters = {
     selected: [],
@@ -17,6 +17,9 @@ export default (filters = defaultFilters, action) => {
 
         case CHANGE_SELECTION:
             return {...filters, selected: payload.selected}
+
+        case LOG_OUT:
+          return defaultFilters
     }
 
     return filters
