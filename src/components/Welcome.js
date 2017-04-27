@@ -6,7 +6,8 @@ import {Tabs, Tab} from 'material-ui/Tabs'
 import {connect} from 'react-redux'
 
 const Welcome = ({email, password, newName, newEmail, newPassword,
-                  setLogInField, nameUniqueError, emailUniqueError,
+                  setLogInField, userIsTypingname, userIsTypingemail,
+                  userIsTypingpassword, nameUniqueError, emailUniqueError,
                   checkNameUnique, checkEmailUnique, userWasRegistered,
                   registerError, userWasLoggedIn, logInError, addUser, logIn}) => {
   const style = {
@@ -32,7 +33,7 @@ const Welcome = ({email, password, newName, newEmail, newPassword,
 
   return (
     <Tabs>
-      <Tab label="Log In" >
+      <Tab label="Вход" >
         <LoginForm
           email = {email}
           password = {password}
@@ -42,7 +43,7 @@ const Welcome = ({email, password, newName, newEmail, newPassword,
           logIn = {logIn}
         />
       </Tab>
-      <Tab label="Sign Up" >
+      <Tab label="Регистрация" >
         <RegisterForm
           email = {newEmail}
           name = {newName}
@@ -50,6 +51,9 @@ const Welcome = ({email, password, newName, newEmail, newPassword,
           setField = {setField}
           nameUniqueError = {nameUniqueError}
           emailUniqueError = {emailUniqueError}
+          userIsTypingname = {userIsTypingname}
+          userIsTypingemail = {userIsTypingemail}
+          userIsTypingpassword = {userIsTypingpassword}
           checkNameUnique = {checkNameUnique}
           checkEmailUnique = {checkEmailUnique}
           userWasRegistered = {userWasRegistered}
@@ -64,9 +68,11 @@ const Welcome = ({email, password, newName, newEmail, newPassword,
 export default connect(store => {
   const { email, password, newName, newEmail, newPassword, nameUniqueError,
           emailUniqueError, userWasRegistered, registerError, logInError,
-          userWasLoggedIn } = store.login
+          userWasLoggedIn, userIsTypingname,  userIsTypingemail,
+          userIsTypingpassword } = store.login
   return {
     email, password, newName, newEmail, newPassword, nameUniqueError,
-    emailUniqueError, userWasRegistered, registerError, logInError, userWasLoggedIn
+    emailUniqueError, userWasRegistered, registerError, logInError,
+    userWasLoggedIn, userIsTypingname, userIsTypingemail, userIsTypingpassword
   }
 }, {setLogInField, checkNameUnique, checkEmailUnique, addUser, logIn})(Welcome)

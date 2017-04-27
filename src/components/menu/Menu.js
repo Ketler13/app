@@ -20,7 +20,7 @@ function Menu(props) {
     })
     const actions = [
         <FlatButton
-            label="Ok"
+            label="Закрыть"
             primary={true}
             keyboardFocused={true}
             onTouchTap={props.closeLoginForm}
@@ -40,11 +40,11 @@ function Menu(props) {
             iconElementRight = {
                 props.userWasLoggedIn ?
                 <FlatButton
-                  label="Log Out"
+                  label="Выход"
                   onTouchTap = {props.logOut}
                 /> :
                 <FlatButton
-                  label="Log In/Sign up"
+                  label="Вход/Регистрация"
                   onTouchTap = {props.openLoginForm}
                 />
             }

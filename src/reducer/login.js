@@ -9,6 +9,9 @@ const defaultState = {
   newEmail: '',
   newName: '',
   newPassword: '',
+  userIsTypingemail: false,
+  userIsTypingname: false,
+  userIsTypingpassword: false,
   nameUniqueError: '',
   emailUniqueError: '',
   userWasRegistered: false,
@@ -44,36 +47,54 @@ export default (state = defaultState, action) => {
     case SET_LOGIN_FIELD:
       return {
         ...state,
+        [`userIsTyping${payload.field.toLowerCase().slice(3)}`]: true,
         [payload.field]: payload.value
       }
 
     case CHECK_EMAIL_UNIQUE:
       return {
         ...state,
+        userIsTypingname: false,
+        userIsTypingemail: false,
+        userIsTypingpassword: false,
+        registerError: '',
         emailUniqueError: ''
       }
 
     case CHECK_NAME_UNIQUE:
       return {
         ...state,
+        userIsTypingname: false,
+        userIsTypingemail: false,
+        userIsTypingpassword: false,
+        registerError: '',
         nameUniqueError: ''
       }
 
     case CHECK_EMAIL_UNIQUE + '_ERROR':
       return {
         ...state,
+        userIsTypingname: false,
+        userIsTypingemail: false,
+        userIsTypingpassword: false,
         emailUniqueError: error
       }
 
     case CHECK_NAME_UNIQUE + '_ERROR':
       return {
         ...state,
+        userIsTypingname: false,
+        userIsTypingemail: false,
+        userIsTypingpassword: false,
         nameUniqueError: error
       }
 
     case ADD_USER:
       return {
         ...state,
+        userIsTypingname: false,
+        userIsTypingemail: false,
+        userIsTypingpassword: false,
         newEmail: '',
         newName: '',
         newPassword: '',
@@ -86,6 +107,9 @@ export default (state = defaultState, action) => {
     case ADD_USER + '_ERROR':
       return {
         ...state,
+        userIsTypingname: false,
+        userIsTypingemail: false,
+        userIsTypingpassword: false,
         userWasRegistered: false,
         registerError: error
       }
@@ -101,6 +125,7 @@ export default (state = defaultState, action) => {
     case LOG_IN + '_ERROR':
       return {
         ...state,
+        userIsTyping: false,
         userWasLoggedIn: false,
         logInError: error
       }

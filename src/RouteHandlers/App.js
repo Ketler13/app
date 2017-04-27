@@ -19,9 +19,9 @@ export default function App(props) {
             <Provider store = {store}>
                 <Paper style = {style} zDepth={1}>
                     <Menu>
-                        <MenuItem name = "Add new split" path="/newsplit"/>
-                        <MenuItem name = "Training diary" path="/splits"/>
-                        <MenuItem name = "Excercises" path="/excercises"/>
+                        <MenuItem name = "Добавить тренировку" path="/newsplit"/>
+                        <MenuItem name = "Тренировки" path="/splits"/>
+                        <MenuItem name = "Упражнения" path="/excercises"/>
                     </Menu>
                     {props.children}
                 </Paper>

@@ -10,7 +10,7 @@ const NewExcerciseForm = ({
   const dataIsCorrect = !error && !!text && !!title
   const actions = [
       <FlatButton
-          label="Ok"
+          label="Добавить"
           primary={dataIsCorrect}
           disabled={!dataIsCorrect}
           keyboardFocused={true}
@@ -31,7 +31,7 @@ const NewExcerciseForm = ({
         value={title}
         onChange={setField('title')}
         fullWidth = {true}
-        hintText="Title"
+        hintText="Название"
         errorText={error}
         onBlur = {checkTitle}
       />
@@ -41,7 +41,7 @@ const NewExcerciseForm = ({
         value={text}
         onChange={setField('text')}
         fullWidth = {true}
-        hintText="Text"
+        hintText="Описание"
       />
     </Dialog>
   )

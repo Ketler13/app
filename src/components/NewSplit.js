@@ -78,7 +78,7 @@ class NewSplit extends Component {
       if (this.props.userWasLoggedIn) {
         const actions = [
             <FlatButton
-                label="Ok"
+                label="Закрыть"
                 primary={true}
                 keyboardFocused={true}
                 onTouchTap={this.closeModal('EXCERCISE_SELECT')}
@@ -96,9 +96,9 @@ class NewSplit extends Component {
                     selectDateForNewSplit = {this.props.selectDateForNewSplit}
                     date = {date}
                 />
-                <RaisedButton label="Select excercises" onTouchTap={this.openModal('EXCERCISE_SELECT')} />
+                <RaisedButton label="Выбрать упражнения" onTouchTap={this.openModal('EXCERCISE_SELECT')} />
                 <RaisedButton
-                    label="Add split"
+                    label="Добавить тренировку"
                     disabled = {
                         (!date || !selected || !newSplitExcercises.size) ?
                         true :
@@ -143,7 +143,7 @@ class NewSplit extends Component {
                 }
                 <Snackbar
                     open={this.props.snackBarIsOpen}
-                    message="Split added to your diary"
+                    message="Тренировка была добавлена в дневник"
                     autoHideDuration={4000}
                 />
             </div>
@@ -158,7 +158,7 @@ export default connect((state) => {
     const { date, selected, newSplitExcercises, excerciseSelectIsOpen, snackBarIsOpen } = state.newSplitState
     const excercises = mapToArray(state.excercises)
     const {userWasLoggedIn} = state.login
-    const userId = state.login.user ? state.login.user.id : null 
+    const userId = state.login.user ? state.login.user.id : null
     return {
         excercises, date, selected, newSplitExcercises, excerciseSelectIsOpen,
         snackBarIsOpen, userWasLoggedIn, userId

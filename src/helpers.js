@@ -27,3 +27,7 @@ export function getToken(store) {
 export function getUserId(store) {
   return store.getState().login.user.id
 }
+
+export function checkEmailRegExp(email) {
+  return /^[-.\w]+@([\w-]+\.)+[\w-]{2,12}$/.test(email)
+}

@@ -16,19 +16,21 @@ export default ({ email, password, setField, userWasLoggedIn, logInError,
         value = {email}
         onChange = {setField('email')}
         hintText="example@example.com"
+        type='email'
       />
       <br/>
       <TextField
         id='5'
         value = {password}
         onChange = {setField('password')}
-        hintText="password"
+        hintText="******"
+        type='password'
       />
       <br/>
       <FlatButton
         secondary = {!!dataIsCorrect}
         disabled = {!dataIsCorrect}
-        label="Log In"
+        label="Войти"
         onTouchTap = {enter}
       />
       {(logInError && !userWasLoggedIn) ? <p>{logInError}</p> : null}

@@ -13,7 +13,7 @@ export default class DatePickerExampleControlled extends Component {
   render() {
     return (
       <DatePicker
-        hintText="Select date"
+        hintText="Выбрать дату"
         value={this.props.date}
         onChange={this.handleChange}
       />

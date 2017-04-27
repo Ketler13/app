@@ -33,6 +33,7 @@ class ExcerciseList extends Component {
 
     addExcercise = (title, text) => ev => {
       this.props.userWasLoggedIn && this.props.addExcercise(title, text)
+      this.props.loadExcercises()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -64,8 +65,10 @@ class ExcerciseList extends Component {
         }
 
         if (!this.props.excercises.length) {
-          excercises = <li style = {style.item}>We can not load your excercises,
-            maybe you need to add few.
+          excercises = <li style = {style.item}>
+            Загружаем...
+            Если Вы видите это сообщение уже некоторое время, возможно, у нас
+            какие-то неполадки с сервером, либо не добавлено ни одного упражения.
           </li>
         } else {
           excercises = this.props.excercises.map(excercise => {
@@ -86,7 +89,7 @@ class ExcerciseList extends Component {
             <div className = "excercises">
                 <Filter/>
                 <RaisedButton
-                  label="Add new"
+                  label="Добавить упражнение"
                   onTouchTap={this.toggleNewExcerciseForm}
                   secondary={true}
                   style={style.button}

@@ -72,12 +72,12 @@ class Excercise extends Component {
                     <ContentClear />
                 </IconButton>
                 <Dialog
-                    title='Are you sure?'
+                    title='Уверены?'
                     actions={actions}
                     modal={true}
                     open={this.props.open}
                 >
-                    You are trying to delete {excercise.title} from the list
+                    Вы пытаетесь удалить {excercise.title} из списка
                 </Dialog>
                 {this.getBody()}
             </Paper>
