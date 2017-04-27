@@ -9,18 +9,27 @@ export default ({ email, password, setField, userWasLoggedIn, logInError,
   const enter = ev => {
     dataIsCorrect && logIn({email, password})
   }
+
+  const style = {
+    input: {
+      width: '80%',
+    }
+  }
+
   return (
     <div>
       <TextField
         id='4'
+        style = {style.input}
         value = {email}
         onChange = {setField('email')}
-        hintText="example@example.com"
+        hintText="user@example.com"
         type='email'
       />
       <br/>
       <TextField
         id='5'
+        style = {style.input}
         value = {password}
         onChange = {setField('password')}
         hintText="******"

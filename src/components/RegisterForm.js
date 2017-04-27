@@ -8,6 +8,7 @@ export default ({email, name, password, setField, nameUniqueError,
                  emailUniqueError, checkNameUnique, checkEmailUnique,
                  addUser, userWasRegistered, registerError, userIsTypingname,
                  userIsTypingemail, userIsTypingpassword                 }) => {
+
   const checkEmail = ev => {
     ev.target.value && checkEmailUnique(ev.target.value)
   }
@@ -24,6 +25,12 @@ export default ({email, name, password, setField, nameUniqueError,
     dataIsCorrect && addUser({email, name, password})
   }
 
+  const style = {
+    input: {
+      width: '80%',
+    }
+  }
+
   if (userWasRegistered) return (
     <div>
       <p>Выполнено: </p>
@@ -35,9 +42,10 @@ export default ({email, name, password, setField, nameUniqueError,
     <div>
       <TextField
         id='1'
+        style = {style.input}
         value = {email}
         onChange = {setField('newEmail')}
-        hintText = "example@example.com"
+        hintText = "user@example.com"
         errorText = {(email && emailUniqueError) ? emailUniqueError : null}
         onBlur = {checkEmail}
         type='email'
@@ -48,6 +56,7 @@ export default ({email, name, password, setField, nameUniqueError,
       <br/>
       <TextField
         id='2'
+        style = {style.input}
         value = {name}
         onChange = {setField('newName')}
         hintText = "Имя пользователя"
@@ -60,6 +69,7 @@ export default ({email, name, password, setField, nameUniqueError,
       <br/>
       <TextField
         id='3'
+        style = {style.input}
         value = {password}
         onChange = {setField('newPassword')}
         hintText="******"

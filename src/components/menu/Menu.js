@@ -40,11 +40,11 @@ function Menu(props) {
             iconElementRight = {
                 props.userWasLoggedIn ?
                 <FlatButton
-                  label="Выход"
+                  label="Выйти"
                   onTouchTap = {props.logOut}
                 /> :
                 <FlatButton
-                  label="Вход/Регистрация"
+                  label="Войти/Создать"
                   onTouchTap = {props.openLoginForm}
                 />
             }
